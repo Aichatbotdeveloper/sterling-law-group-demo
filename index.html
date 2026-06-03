@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sterling Law Group — Dedicated Legal Representation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       CSS CUSTOM PROPERTIES
+    ============================================================ */
+    :root {
+      --navy:       #0b1b38;
+      --navy-mid:   #112248;
+      --navy-light: #1a3363;
+      --gold:       #b89a4e;
+      --gold-light: #d4b96a;
+      --gold-pale:  #e8d5a0;
+      --white:      #ffffff;
+      --off-white:  #f7f5f0;
+      --text-muted: #8a9ab5;
+      --border:     rgba(184,154,78,0.25);
+
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'Montserrat', sans-serif;
+
+      --section-pad: 100px 0;
+      --container:   1160px;
+      --radius:      3px;
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--navy);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; }
+    a  { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* ============================================================
+       UTILITY
+    ============================================================ */
+    .gold  { color: var(--gold); }
+    .gold-italic { color: var(--gold); font-style: italic; }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 15px 38px;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: var(--radius);
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    }
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(184,154,78,0.35);
+    }
+
+    .btn-outline {
+      display: inline-block;
+      padding: 14px 36px;
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: var(--radius);
+      transition: background 0.3s, color 0.3s, transform 0.2s;
+    }
+    .btn-outline:hover {
+      background: var(--gold);
+      color: var(--navy);
+      transform: translateY(-2px);
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+
+    .divider-gold {
+      width: 52px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      margin: 18px 0 32px;
+    }
+
+    .divider-gold.center { margin: 18px auto 32px; }
+
+    /* ============================================================
+       SCROLL REVEAL
+    ============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ============================================================
+       ANNOUNCEMENT BAR
+    ============================================================ */
+    .announcement-bar {
+      background: var(--navy);
+      color: var(--gold-pale);
+      text-align: center;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      font-weight: 500;
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .announcement-bar span { color: var(--gold-light); }
+
+    /* ============================================================
+       NAVIGATION
+    ============================================================ */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(11,27,56,0.97);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.35); }
+
+    .nav-inner {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 76px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .nav-logo-mark {
+      width: 42px;
+      height: 42px;
+      border: 1.5px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .nav-logo-mark svg { width: 22px; height: 22px; }
+
+    .nav-logo-text { line-height: 1.2; }
+    .nav-logo-text strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.04em;
+    }
+    .nav-logo-text span {
+      display: block;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+    .nav-links a {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      transition: color 0.25s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 1px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transition: transform 0.25s;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .nav-cta {
+      padding: 10px 26px;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--gold);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--navy);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1800&q=80&fit=crop');
+      background-size: cover;
+      background-position: center 30%;
+      opacity: 0.18;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        105deg,
+        rgba(11,27,56,0.97) 0%,
+        rgba(11,27,56,0.88) 50%,
+        rgba(11,27,56,0.60) 100%
+      );
+    }
+
+    /* decorative vertical lines */
+    .hero-lines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .hero-lines::before,
+    .hero-lines::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, var(--border), transparent);
+    }
+    .hero-lines::before { left: 22%; }
+    .hero-lines::after  { right: 22%; }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 120px 32px 100px;
+      max-width: 740px;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+    .hero-eyebrow-line {
+      width: 36px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .hero-eyebrow span {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 5.5vw, 4.4rem);
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.12;
+      margin-bottom: 26px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.35s forwards;
+    }
+    .hero h1 em {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    .hero-desc {
+      font-size: 1.0rem;
+      color: rgba(255,255,255,0.72);
+      max-width: 520px;
+      margin-bottom: 44px;
+      line-height: 1.8;
+      font-weight: 300;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.5s forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.65s forwards;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.8s forwards;
+    }
+    .hero-stat-num {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: var(--gold);
+      line-height: 1;
+      display: block;
+    }
+    .hero-stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-top: 6px;
+      display: block;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* scrolling ticker */
+    .hero-ticker {
+      position: absolute;
+      bottom: 0;
+      left: 0; right: 0;
+      background: rgba(184,154,78,0.12);
+      border-top: 1px solid var(--border);
+      overflow: hidden;
+      height: 44px;
+      display: flex;
+      align-items: center;
+    }
+    .ticker-track {
+      display: flex;
+      white-space: nowrap;
+      animation: ticker 28s linear infinite;
+    }
+    .ticker-track span {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold-pale);
+      padding: 0 40px;
+    }
+    .ticker-track span::before {
+      content: '—';
+      margin-right: 16px;
+      color: var(--gold);
+    }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ============================================================
+       ABOUT / INTRO STRIP
+    ============================================================ */
+    .intro {
+      background: var(--off-white);
+      padding: 72px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .intro-inner {
+      display: flex;
+      align-items: center;
+      gap: 64px;
+    }
+    .intro-badge {
+      flex-shrink: 0;
+      width: 120px;
+      height: 120px;
+      border: 1.5px solid var(--gold);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .intro-badge strong {
+      font-family: var(--font-display);
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .intro-badge span {
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .intro-text h2 {
+      font-family: var(--font-display);
+      font-size: 1.9rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    .intro-text p {
+      font-size: 0.9rem;
+      color: #4a5568;
+      max-width: 620px;
+      line-height: 1.9;
+    }
+
+    /* ============================================================
+       PRACTICE AREAS
+    ============================================================ */
+    .practice {
+      padding: var(--section-pad);
+      background: var(--white);
+    }
+    .practice-header {
+      text-align: center;
+      margin-bottom: 62px;
+    }
+    .practice-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.2;
+    }
+
+    .practice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 2px;
+      background: rgba(0,0,0,0.06);
+    }
+
+    .practice-card {
+      background: var(--white);
+      padding: 44px 36px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.35s;
+      cursor: default;
+    }
+    .practice-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 0;
+      background: var(--gold);
+      transition: height 0.4s ease;
+    }
+    .practice-card:hover { background: var(--navy); }
+    .practice-card:hover::before { height: 100%; }
+    .practice-card:hover .pc-num,
+    .practice-card:hover h3,
+    .practice-card:hover p { color: var(--white); }
+    .practice-card:hover .pc-num { color: var(--gold); }
+
+    .pc-num {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      margin-bottom: 18px;
+      display: block;
+      transition: color 0.3s;
+    }
+    .practice-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 12px;
+      transition: color 0.3s;
+    }
+    .practice-card p {
+      font-size: 0.84rem;
+      color: #5a6880;
+      line-height: 1.8;
+      transition: color 0.3s;
+    }
+
+    /* ============================================================
+       WHY CHOOSE US
+    ============================================================ */
+    .why {
+      padding: var(--section-pad);
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+    }
+    .why::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184,154,78,0.06), transparent 70%);
+      pointer-events: none;
+    }
+
+    .why-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .why-left h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .why-left p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.62);
+      line-height: 1.9;
+      margin-bottom: 36px;
+    }
+
+    .why-items { display: flex; flex-direction: column; gap: 28px; }
+
+    .why-item {
+      display: flex;
+      gap: 22px;
+      align-items: flex-start;
+    }
+    .why-icon {
+      width: 48px;
+      height: 48px;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .why-icon svg { width: 22px; height: 22px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+
+    .why-item h4 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 5px;
+    }
+    .why-item p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+    }
+
+    .why-image {
+      position: relative;
+    }
+    .why-image img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      filter: brightness(0.85) saturate(0.7);
+    }
+    .why-image-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 32px;
+      background: linear-gradient(0deg, rgba(11,27,56,0.94) 0%, transparent 100%);
+    }
+    .why-image-stat {
+      font-family: var(--font-display);
+      font-size: 2.6rem;
+      color: var(--gold);
+      font-weight: 700;
+      line-height: 1;
+      display: block;
+    }
+    .why-image-stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-top: 6px;
+      display: block;
+    }
+    .why-image-border {
+      position: absolute;
+      top: 20px; right: -20px;
+      width: calc(100% - 20px);
+      height: calc(100% - 20px);
+      border: 1.5px solid var(--border);
+      pointer-events: none;
+    }
+
+    /* ============================================================
+       TESTIMONIALS
+    ============================================================ */
+    .testimonials {
+      padding: var(--section-pad);
+      background: var(--off-white);
+    }
+    .testimonials-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .testimonials-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.2;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .tcard {
+      background: var(--white);
+      padding: 44px 36px;
+      border-bottom: 3px solid transparent;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+      position: relative;
+    }
+    .tcard:hover {
+      border-color: var(--gold);
+      box-shadow: 0 12px 44px rgba(0,0,0,0.08);
+      transform: translateY(-4px);
+    }
+
+    .tcard-stars {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 22px;
+    }
+    .tcard-stars span {
+      width: 10px;
+      height: 10px;
+      background: var(--gold);
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+
+    .tcard-quote {
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      color: var(--gold-pale);
+      line-height: 0.5;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .tcard p {
+      font-size: 0.88rem;
+      color: #4a5568;
+      line-height: 1.85;
+      margin-bottom: 28px;
+      font-style: italic;
+    }
+
+    .tcard-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(0,0,0,0.07);
+    }
+    .tcard-initials {
+      width: 40px;
+      height: 40px;
+      background: var(--navy);
+      color: var(--gold);
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .tcard-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--navy);
+      display: block;
+    }
+    .tcard-role {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ============================================================
+       CTA SECTION
+    ============================================================ */
+    .cta {
+      padding: 110px 0;
+      background: var(--navy);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1600&q=80&fit=crop');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.07;
+    }
+    .cta-content { position: relative; z-index: 1; }
+    .cta h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+      font-weight: 600;
+      color: var(--white);
+      max-width: 640px;
+      margin: 0 auto 16px;
+      line-height: 1.2;
+    }
+    .cta p {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.58);
+      max-width: 500px;
+      margin: 0 auto 44px;
+      line-height: 1.8;
+    }
+    .cta-actions { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+
+    /* ============================================================
+       CONTACT BAR
+    ============================================================ */
+    .contact-bar {
+      background: var(--gold);
+      padding: 22px 0;
+    }
+    .contact-bar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .contact-info {
+      display: flex;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .contact-item svg {
+      width: 16px; height: 16px;
+      stroke: var(--navy);
+      fill: none;
+      stroke-width: 2;
+      flex-shrink: 0;
+    }
+    .contact-item span {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--navy);
+      letter-spacing: 0.04em;
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background: #060f1e;
+      color: rgba(255,255,255,0.6);
+      padding: 72px 0 32px;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 52px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      margin-bottom: 32px;
+    }
+    .footer-brand strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+    .footer-brand .tagline {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+    .footer-brand p {
+      font-size: 0.82rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.45);
+      max-width: 280px;
+    }
+    .footer-col h4 {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+    .footer-col li {
+      margin-bottom: 10px;
+    }
+    .footer-col a {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.5);
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--gold-light); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-bottom p { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+    .footer-disclaimer {
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.22);
+      max-width: 560px;
+      text-align: right;
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       CHATBOT NUDGE
+    ============================================================ */
+    .chat-nudge {
+      position: fixed;
+      bottom: 96px;
+      right: 24px;
+      background: var(--navy);
+      border: 1px solid var(--border);
+      color: var(--white);
+      padding: 12px 18px 12px 14px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      border-radius: 3px;
+      box-shadow: 0 6px 30px rgba(0,0,0,0.4);
+      z-index: 9998;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s, transform 0.5s;
+      cursor: pointer;
+      max-width: 240px;
+    }
+    .chat-nudge.show { opacity: 1; transform: translateY(0); }
+    .chat-nudge-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #3fcf8e;
+      flex-shrink: 0;
+      animation: pulse 2s infinite;
+    }
+    .chat-nudge-close {
+      margin-left: auto;
+      opacity: 0.4;
+      font-size: 0.7rem;
+      cursor: pointer;
+    }
+    .chat-nudge-close:hover { opacity: 1; }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%       { transform: scale(1.4); opacity: 0.7; }
+    }
+
+    /* ============================================================
+       MOBILE NAV
+    ============================================================ */
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      background: var(--navy-mid);
+      border-top: 1px solid var(--border);
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.4s ease;
+    }
+    .mobile-menu.open { max-height: 400px; }
+    .mobile-menu a {
+      padding: 16px 32px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: block;
+      transition: color 0.2s, background 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--gold); background: rgba(184,154,78,0.06); }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 900px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu { display: flex; }
+
+      .why-inner { grid-template-columns: 1fr; gap: 48px; }
+      .why-image { display: none; }
+
+      .testimonials-grid { grid-template-columns: 1fr; }
+
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
+    }
+
+    @media (max-width: 640px) {
+      .hero-stats { flex-direction: column; gap: 24px; }
+      .intro-inner { flex-direction: column; gap: 28px; }
+      .contact-bar-inner { flex-direction: column; align-items: flex-start; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+      .footer-disclaimer { text-align: left; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ANNOUNCEMENT BAR -->
+  <div class="announcement-bar">
+    <span>Free Consultations Available</span> — Call (555) 400-7200 or speak with Victoria, our AI legal assistant, available 24/7
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <div class="nav-logo-mark">
+          <!-- scales of justice icon -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="#b89a4e" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 3v18M3 21h18M6 7l-3 6h6L6 7zM18 7l-3 6h6l-3-6z"/>
+            <line x1="3" y1="21" x2="6" y2="13"/>
+            <line x1="21" y1="21" x2="18" y2="13"/>
+            <line x1="6" y1="21" x2="18" y2="21"/>
+          </svg>
+        </div>
+        <div class="nav-logo-text">
+          <strong>Sterling Law Group</strong>
+          <span>Attorneys at Law</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#practice">Practice Areas</a></li>
+        <li><a href="#why">Our Firm</a></li>
+        <li><a href="#testimonials">Results</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <a href="#cta" class="btn-primary nav-cta">Free Consultation</a>
+
+      <div class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav class="mobile-menu" id="mobileMenu">
+      <a href="#practice" onclick="closeMobile()">Practice Areas</a>
+      <a href="#why"      onclick="closeMobile()">Our Firm</a>
+      <a href="#testimonials" onclick="closeMobile()">Results</a>
+      <a href="#contact"  onclick="closeMobile()">Contact</a>
+      <a href="#cta"      onclick="closeMobile()" style="color:var(--gold)">Free Consultation</a>
+    </nav>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-lines"></div>
+
+    <div class="hero-content container">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-line"></div>
+        <span>Established 1998 &nbsp;|&nbsp; Over 25 Years of Legal Excellence</span>
+      </div>
+
+      <h1>
+        We Fight for<br>
+        <em>Justice.</em> We Protect<br>
+        Your Rights.
+      </h1>
+
+      <p class="hero-desc">
+        Sterling Law Group brings decades of courtroom experience, strategic legal counsel, and an unwavering commitment to our clients. When the stakes are highest, you need attorneys who will not rest until justice is served.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#cta" class="btn-primary">Schedule a Free Consultation</a>
+        <a href="#practice" class="btn-outline">Our Practice Areas</a>
+      </div>
+
+      <div class="hero-stats">
+        <div>
+          <span class="hero-stat-num">97%</span>
+          <span class="hero-stat-label">Case Success Rate</span>
+        </div>
+        <div>
+          <span class="hero-stat-num">4,800+</span>
+          <span class="hero-stat-label">Clients Represented</span>
+        </div>
+        <div>
+          <span class="hero-stat-num">$380M+</span>
+          <span class="hero-stat-label">Recovered for Clients</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-ticker">
+      <div class="ticker-track">
+        <span>Personal Injury</span>
+        <span>Family Law</span>
+        <span>Criminal Defense</span>
+        <span>Business Law</span>
+        <span>Real Estate Law</span>
+        <span>Immigration Law</span>
+        <span>Estate Planning</span>
+        <span>Free Consultations</span>
+        <span>Confidential Advice</span>
+        <span>Personal Injury</span>
+        <span>Family Law</span>
+        <span>Criminal Defense</span>
+        <span>Business Law</span>
+        <span>Real Estate Law</span>
+        <span>Immigration Law</span>
+        <span>Estate Planning</span>
+        <span>Free Consultations</span>
+        <span>Confidential Advice</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO STRIP -->
+  <section class="intro">
+    <div class="container">
+      <div class="intro-inner reveal">
+        <div class="intro-badge">
+          <strong>25+</strong>
+          <span>Years of<br>Service</span>
+        </div>
+        <div class="intro-text">
+          <h2>A Firm Built on <em style="font-style:italic;color:var(--gold)">Principle</em> and <em style="font-style:italic;color:var(--gold)">Results</em></h2>
+          <p>
+            Since 1998, Sterling Law Group has stood as one of the region's most trusted legal practices. Our attorneys combine deep legal expertise with genuine dedication to every client's outcome. We do not take cases we cannot win, and we do not rest until our clients receive the justice they deserve. All consultations are strictly confidential, and we work on contingency for personal injury matters — you pay nothing unless we win.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRACTICE AREAS -->
+  <section class="practice" id="practice">
+    <div class="container">
+      <div class="practice-header reveal">
+        <span class="section-label">What We Do</span>
+        <div class="divider-gold center"></div>
+        <h2>Our <em class="gold-italic">Practice Areas</em></h2>
+      </div>
+
+      <div class="practice-grid">
+        <div class="practice-card reveal">
+          <span class="pc-num">01</span>
+          <h3>Personal Injury</h3>
+          <p>We represent accident victims in claims involving car crashes, slip-and-fall incidents, workplace injuries, and medical malpractice. Our contingency-fee model means you pay nothing unless we recover compensation on your behalf.</p>
+        </div>
+        <div class="practice-card reveal">
+          <span class="pc-num">02</span>
+          <h3>Family Law</h3>
+          <p>From divorce and child custody arrangements to adoption and spousal support, our family law attorneys handle sensitive matters with the discretion, empathy, and legal precision your family deserves.</p>
+        </div>
+        <div class="practice-card reveal">
+          <span class="pc-num">03</span>
+          <h3>Criminal Defense</h3>
+          <p>Facing criminal charges requires experienced, aggressive defense counsel. We protect your constitutional rights at every stage — from arraignment through trial — and work tirelessly to achieve the best possible outcome.</p>
+        </div>
+        <div class="practice-card reveal">
+          <span class="pc-num">04</span>
+          <h3>Business Law</h3>
+          <p>We advise corporations, partnerships, and startups on entity formation, contract drafting, commercial disputes, mergers, and compliance matters. Sound legal counsel is the foundation of every successful business.</p>
+        </div>
+        <div class="practice-card reveal">
+          <span class="pc-num">05</span>
+          <h3>Real Estate Law</h3>
+          <p>Our real estate attorneys handle residential and commercial transactions, title disputes, landlord-tenant conflicts, and property development matters with meticulous attention to protecting your investment.</p>
+        </div>
+        <div class="practice-card reveal">
+          <span class="pc-num">06</span>
+          <h3>Immigration Law</h3>
+          <p>We guide individuals and families through visa applications, green card petitions, naturalization proceedings, and deportation defense — providing clear guidance through a complex and often intimidating process.</p>
+        </div>
+        <div class="practice-card reveal">
+          <span class="pc-num">07</span>
+          <h3>Estate Planning</h3>
+          <p>Protect your legacy and your loved ones with comprehensive wills, trusts, powers of attorney, and probate administration. We craft estate plans that reflect your precise wishes and minimize unnecessary tax liability.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section class="why" id="why">
+    <div class="container">
+      <div class="why-inner">
+        <div class="why-left reveal">
+          <span class="section-label">Why Sterling Law Group</span>
+          <div class="divider-gold"></div>
+          <h2>The Difference<br>Experience<br><em class="gold-italic">Makes</em></h2>
+          <p>
+            In a crowded legal market, Sterling Law Group has built its reputation on a single foundation: delivering measurable results for real people. We combine senior-level legal expertise with a client-first culture that keeps you informed and empowered throughout every stage of your case.
+          </p>
+
+          <div class="why-items">
+            <div class="why-item">
+              <div class="why-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div>
+                <h4>Seasoned Trial Attorneys</h4>
+                <p>Our team includes former prosecutors, federal litigators, and specialist counsel with decades of courtroom experience across all seven practice areas.</p>
+              </div>
+            </div>
+            <div class="why-item">
+              <div class="why-icon">
+                <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              </div>
+              <div>
+                <h4>Proven, Documented Results</h4>
+                <p>Over $380 million recovered for clients across personal injury, business litigation, and family law matters. Our track record speaks for itself.</p>
+              </div>
+            </div>
+            <div class="why-item">
+              <div class="why-icon">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div>
+                <h4>Free Consultations — No Obligation</h4>
+                <p>Every new client receives a complimentary, fully confidential consultation with a licensed attorney. No pressure, no commitment, no cost to you.</p>
+              </div>
+            </div>
+            <div class="why-item">
+              <div class="why-icon">
+                <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              </div>
+              <div>
+                <h4>Absolute Client Confidentiality</h4>
+                <p>Attorney-client privilege is sacred at Sterling Law Group. Every conversation, document, and case detail is handled with complete discretion and legal protection.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="why-image reveal">
+          <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=80&fit=crop" alt="Sterling Law Group attorneys" />
+          <div class="why-image-overlay">
+            <span class="why-image-stat">4,800+</span>
+            <span class="why-image-stat-label">Clients Successfully Represented</span>
+          </div>
+          <div class="why-image-border"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="testimonials-header reveal">
+        <span class="section-label">Client Testimonials</span>
+        <div class="divider-gold center"></div>
+        <h2>What Our <em class="gold-italic">Clients</em> Say</h2>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="tcard reveal">
+          <div class="tcard-stars">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <span class="tcard-quote">"</span>
+          <p>After my accident, I did not know where to turn. Sterling Law Group took my call on a Saturday evening, explained everything clearly, and had a case filed within 48 hours. They recovered more than three times what the insurance company initially offered. I cannot recommend them highly enough.</p>
+          <div class="tcard-author">
+            <div class="tcard-initials">MH</div>
+            <div>
+              <span class="tcard-name">Marcus Holloway</span>
+              <span class="tcard-role">Personal Injury Client</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tcard reveal">
+          <div class="tcard-stars">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <span class="tcard-quote">"</span>
+          <p>Going through a custody dispute was the most difficult experience of my life. My attorney at Sterling Law Group was not only extraordinarily skilled in the courtroom — she was genuinely compassionate throughout the entire process. My children are now exactly where they should be.</p>
+          <div class="tcard-author">
+            <div class="tcard-initials">DW</div>
+            <div>
+              <span class="tcard-name">Diane Weston</span>
+              <span class="tcard-role">Family Law Client</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tcard reveal">
+          <div class="tcard-stars">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <span class="tcard-quote">"</span>
+          <p>We retained Sterling Law Group for a complex commercial contract dispute involving three parties across two states. Their business litigation team was exceptionally organized, strategically brilliant, and ultimately secured a settlement that exceeded our best-case projections by a significant margin.</p>
+          <div class="tcard-author">
+            <div class="tcard-initials">RP</div>
+            <div>
+              <span class="tcard-name">Robert Pacheco</span>
+              <span class="tcard-role">Business Law Client</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="cta">
+    <div class="container">
+      <div class="cta-content reveal">
+        <span class="section-label">Take the First Step</span>
+        <h2>Schedule Your <em class="gold-italic">Free Consultation</em> Today</h2>
+        <p>Speak directly with a licensed Sterling Law Group attorney — at no cost and with no obligation. Your situation is unique; your legal strategy should be too.</p>
+        <div class="cta-actions">
+          <a href="tel:5554007200" class="btn-primary">Call (555) 400-7200</a>
+          <a href="mailto:consult@sterlinglawgroup.com" class="btn-outline">Email Our Office</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT BAR -->
+  <div class="contact-bar" id="contact">
+    <div class="container">
+      <div class="contact-bar-inner">
+        <div class="contact-info">
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.91 6.91l.61-.61a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>(555) 400-7200</span>
+          </div>
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span>consult@sterlinglawgroup.com</span>
+          </div>
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>Mon – Fri: 8:00 AM – 6:00 PM</span>
+          </div>
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>300 Sterling Plaza, Suite 1800</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <strong>Sterling Law Group</strong>
+          <div class="tagline">Attorneys at Law</div>
+          <p>Dedicated legal representation across seven practice areas. Serving clients with integrity, expertise, and an uncompromising commitment to results since 1998.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Practice Areas</h4>
+          <ul>
+            <li><a href="#practice">Personal Injury</a></li>
+            <li><a href="#practice">Family Law</a></li>
+            <li><a href="#practice">Criminal Defense</a></li>
+            <li><a href="#practice">Business Law</a></li>
+            <li><a href="#practice">Real Estate Law</a></li>
+            <li><a href="#practice">Immigration Law</a></li>
+            <li><a href="#practice">Estate Planning</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Our Firm</h4>
+          <ul>
+            <li><a href="#why">About Us</a></li>
+            <li><a href="#why">Our Attorneys</a></li>
+            <li><a href="#testimonials">Case Results</a></li>
+            <li><a href="#testimonials">Client Reviews</a></li>
+            <li><a href="#cta">Free Consultation</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="tel:5554007200">(555) 400-7200</a></li>
+            <li><a href="mailto:consult@sterlinglawgroup.com">consult@sterlinglawgroup.com</a></li>
+            <li><a href="#contact">300 Sterling Plaza, Suite 1800</a></li>
+            <li><a href="#contact">Mon – Fri: 8AM – 6PM</a></li>
+            <li><a href="#contact">Emergency: 24/7 Line</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 Sterling Law Group. All rights reserved.</p>
+        <p class="footer-disclaimer">
+          This website is for informational purposes only and does not constitute legal advice. Viewing this site does not establish an attorney-client relationship. Results may vary based on individual circumstances.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CHAT NUDGE -->
+  <div class="chat-nudge" id="chatNudge">
+    <div class="chat-nudge-dot"></div>
+    <span>Speak with <strong style="color:var(--gold)">Victoria</strong> — our legal AI assistant</span>
+    <span class="chat-nudge-close" id="nudgeClose">&#10005;</span>
+  </div>
+
+  <!-- VOICEFLOW — VICTORIA CHATBOT -->
+  <script type="text/javascript">
+    (function(d, t) {
+      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      v.onload = function() {
+        window.voiceflow.chat.load({
+          verify: { projectID: '6a2008c503cf06da9517b919' },
+          url: 'https://general-runtime.voiceflow.com',
+          voice: {
+            url: "https://runtime-api.voiceflow.com"
+          }
+        });
+      }
+      v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
+      v.type = "text/javascript";
+      s.parentNode.insertBefore(v, s);
+    })(document, 'script');
+  </script>
+
+  <!-- JS: Scroll effects, nav, nudge -->
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.12 });
+    reveals.forEach(r => observer.observe(r));
+
+    // Sticky nav shadow
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Hamburger
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+    function closeMobile() { mobileMenu.classList.remove('open'); }
+
+    // Chat nudge — show after 5s
+    const nudge = document.getElementById('chatNudge');
+    setTimeout(() => nudge.classList.add('show'), 5000);
+    document.getElementById('nudgeClose').addEventListener('click', e => {
+      e.stopPropagation();
+      nudge.classList.remove('show');
+    });
+
+    // Stagger reveal delays on grid items
+    document.querySelectorAll('.practice-card').forEach((c, i) => {
+      c.style.transitionDelay = (i * 0.07) + 's';
+    });
+  </script>
+
+</body>
+</html>
