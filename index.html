@@ -1422,24 +1422,757 @@
     <span class="chat-nudge-close" id="nudgeClose">&#10005;</span>
   </div>
 
-  <!-- VOICEFLOW — VICTORIA CHATBOT -->
-  <script type="text/javascript">
-    (function(d, t) {
-      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-      v.onload = function() {
-        window.voiceflow.chat.load({
-          verify: { projectID: '6a2008c503cf06da9517b919' },
-          url: 'https://general-runtime.voiceflow.com',
-          voice: {
-            url: "https://runtime-api.voiceflow.com"
-          }
-        });
-      }
-      v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
-      v.type = "text/javascript";
-      s.parentNode.insertBefore(v, s);
-    })(document, 'script');
-  </script>
+ <!-- ══════════════════════════════════════
+  
+
+<!-- VICTORIA — BUILT-IN LEGAL AI ASSISTANT -->
+<style>
+  #vic-widget {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9997;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  /* Launcher */
+  #vic-launcher {
+    width: 58px;
+    height: 58px;
+    background: var(--gold);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(184,154,78,0.45);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+  }
+  #vic-launcher:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 32px rgba(184,154,78,0.55);
+  }
+  #vic-launcher .ic-chat { transition: opacity 0.2s; }
+  #vic-launcher .ic-close { position: absolute; opacity: 0; transition: opacity 0.2s; }
+  #vic-widget.open #vic-launcher .ic-chat  { opacity: 0; }
+  #vic-widget.open #vic-launcher .ic-close { opacity: 1; }
+
+  #vic-badge {
+    position: absolute;
+    top: -3px; right: -3px;
+    width: 17px; height: 17px;
+    background: #e53e3e;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: badgePop 0.3s ease;
+  }
+  #vic-widget.open #vic-badge { display: none; }
+  @keyframes badgePop { from { transform: scale(0); } to { transform: scale(1); } }
+
+  /* Chat box */
+  #vic-box {
+    position: absolute;
+    bottom: 72px;
+    right: 0;
+    width: 375px;
+    background: #ffffff;
+    border: 1px solid rgba(184,154,78,0.25);
+    border-radius: 3px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+    display: none;
+    flex-direction: column;
+    max-height: 580px;
+    animation: slideUp 0.3s ease;
+    overflow: hidden;
+  }
+  #vic-widget.open #vic-box { display: flex; }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Header */
+  #vic-head {
+    background: linear-gradient(135deg, #0b1b38 0%, #1a3363 100%);
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+    border-bottom: 2px solid var(--gold);
+  }
+  .vic-avatar {
+    width: 40px; height: 40px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #0b1b38;
+    flex-shrink: 0;
+  }
+  .vic-head-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 0.05em;
+    display: block;
+  }
+  .vic-head-status {
+    font-size: 10px;
+    color: var(--gold-light);
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 2px;
+  }
+  .vic-head-status::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: #3fcf8e;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  .vic-disclaimer {
+    font-size: 9px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.06em;
+    margin-top: 2px;
+    display: block;
+  }
+
+  /* Messages */
+  #vic-msgs {
+    flex: 1;
+    overflow-y: auto;
+    padding: 18px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    background: #f7f5f0;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(184,154,78,0.25) transparent;
+  }
+  #vic-msgs::-webkit-scrollbar { width: 3px; }
+  #vic-msgs::-webkit-scrollbar-thumb { background: rgba(184,154,78,0.3); border-radius: 2px; }
+
+  .vic-bubble {
+    max-width: 87%;
+    padding: 11px 14px;
+    font-size: 12.5px;
+    line-height: 1.65;
+    border-radius: 2px;
+    animation: popIn 0.22s ease;
+  }
+  @keyframes popIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .vic-bubble.agent {
+    background: #ffffff;
+    color: #1a2a4a;
+    align-self: flex-start;
+    border-left: 2px solid var(--gold);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  }
+  .vic-bubble.user {
+    background: #0b1b38;
+    color: #ffffff;
+    align-self: flex-end;
+    font-weight: 500;
+  }
+
+  /* Buttons */
+  .vic-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    align-self: flex-start;
+    animation: popIn 0.22s ease;
+    max-width: 100%;
+  }
+  .vic-btn {
+    background: #ffffff;
+    border: 1px solid rgba(184,154,78,0.5);
+    color: #0b1b38;
+    padding: 7px 13px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .vic-btn:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #0b1b38;
+  }
+
+  /* Typing */
+  .vic-typing {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    padding: 11px 14px;
+    align-self: flex-start;
+    background: #ffffff;
+    border-left: 2px solid var(--gold);
+    border-radius: 2px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    animation: popIn 0.22s ease;
+  }
+  .vic-typing span {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: typeDot 1.2s infinite;
+  }
+  .vic-typing span:nth-child(2) { animation-delay: 0.2s; }
+  .vic-typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typeDot {
+    0%,60%,100% { opacity: 0.3; transform: scale(0.8); }
+    30% { opacity: 1; transform: scale(1.1); }
+  }
+
+  /* Input */
+  #vic-foot {
+    padding: 11px 13px;
+    border-top: 1px solid rgba(184,154,78,0.15);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    background: #ffffff;
+    flex-shrink: 0;
+  }
+  #vic-input {
+    flex: 1;
+    background: #f7f5f0;
+    border: 1px solid rgba(11,27,56,0.12);
+    border-radius: 2px;
+    padding: 9px 12px;
+    font-size: 12px;
+    color: #0b1b38;
+    font-family: 'Montserrat', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  #vic-input:focus { border-color: var(--gold); }
+  #vic-input::placeholder { color: #aab; }
+  #vic-send {
+    width: 37px; height: 37px;
+    background: #0b1b38;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  #vic-send:hover { background: #1a3363; }
+
+  .vic-powered {
+    text-align: center;
+    font-size: 9px;
+    color: #bbb;
+    letter-spacing: 0.1em;
+    padding: 6px 0 8px;
+    text-transform: uppercase;
+    background: #ffffff;
+    flex-shrink: 0;
+  }
+</style>
+
+<div id="vic-widget">
+  <div id="vic-box">
+    <div id="vic-head">
+      <div class="vic-avatar">V</div>
+      <div style="flex:1">
+        <span class="vic-head-name">Victoria &nbsp;·&nbsp; Sterling Law Group</span>
+        <span class="vic-head-status">Available 24 hours a day</span>
+        <span class="vic-disclaimer">General information only. Not legal advice.</span>
+      </div>
+    </div>
+    <div id="vic-msgs"></div>
+    <div id="vic-foot">
+      <input id="vic-input" type="text" placeholder="Type your question…" autocomplete="off" />
+      <button id="vic-send" aria-label="Send">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M13 1L1 7l5 1.5L7.5 13 13 1z" fill="#b89a4e"/>
+        </svg>
+      </button>
+    </div>
+    <div class="vic-powered">Sterling Law Group &nbsp;·&nbsp; Confidential &amp; Secure</div>
+  </div>
+
+  <button id="vic-launcher" aria-label="Speak with Victoria">
+    <svg class="ic-chat" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0b1b38" stroke-width="2" stroke-linecap="round">
+      <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+    </svg>
+    <svg class="ic-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0b1b38" stroke-width="2.5" stroke-linecap="round">
+      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+  <div id="vic-badge">1</div>
+</div>
+
+<script>
+(function(){
+
+  /* ── PRACTICE AREA DATA ── */
+  const AREAS = [
+    { name:"Personal Injury", fee:"contingency — you pay nothing unless we win", consult:"Free" },
+    { name:"Family Law",       fee:"hourly from $250/hr",                         consult:"$200 for 60 min" },
+    { name:"Criminal Defense", fee:"varies by case complexity",                   consult:"Free" },
+    { name:"Business Law",     fee:"hourly or retainer arrangements available",   consult:"$250 for 60 min" },
+    { name:"Real Estate Law",  fee:"fixed fee for standard transactions",         consult:"$150 for 45 min" },
+    { name:"Immigration Law",  fee:"hourly, payment plans available",             consult:"$200 for 60 min" },
+    { name:"Estate Planning",  fee:"fixed fee packages from $500",                consult:"Free" }
+  ];
+
+  /* ── STATE ── */
+  let stage = "welcome";
+  let intake  = {};
+  let booking = {};
+  let selectedArea = null;
+
+  /* ── DOM ── */
+  const widget   = document.getElementById("vic-widget");
+  const launcher = document.getElementById("vic-launcher");
+  const msgs     = document.getElementById("vic-msgs");
+  const input    = document.getElementById("vic-input");
+  const sendBtn  = document.getElementById("vic-send");
+
+  /* ── TOGGLE ── */
+  launcher.addEventListener("click", () => {
+    widget.classList.toggle("open");
+    if (widget.classList.contains("open") && msgs.children.length === 0) {
+      setTimeout(greet, 380);
+    }
+  });
+
+  /* ── SEND ── */
+  sendBtn.addEventListener("click", go);
+  input.addEventListener("keydown", e => { if (e.key === "Enter") go(); });
+
+  function go() {
+    const t = input.value.trim();
+    if (!t) return;
+    input.value = "";
+    bubble(t, "user");
+    route(t);
+  }
+
+  /* ── HELPERS ── */
+  function bubble(html, who) {
+    const b = document.createElement("div");
+    b.className = "vic-bubble " + who;
+    b.innerHTML = html;
+    msgs.appendChild(b);
+    scroll();
+  }
+
+  function buttons(arr) {
+    const w = document.createElement("div");
+    w.className = "vic-btns";
+    arr.forEach(lbl => {
+      const b = document.createElement("button");
+      b.className = "vic-btn";
+      b.textContent = lbl;
+      b.addEventListener("click", () => { w.remove(); bubble(lbl,"user"); route(lbl); });
+      w.appendChild(b);
+    });
+    msgs.appendChild(w);
+    scroll();
+  }
+
+  function typing(ms) {
+    return new Promise(res => {
+      const t = document.createElement("div");
+      t.className = "vic-typing";
+      t.innerHTML = "<span></span><span></span><span></span>";
+      msgs.appendChild(t);
+      scroll();
+      setTimeout(() => { t.remove(); res(); }, ms);
+    });
+  }
+
+  async function vic(html, btns, delay=850) {
+    await typing(delay);
+    bubble(html, "agent");
+    if (btns && btns.length) buttons(btns);
+  }
+
+  function scroll() { msgs.scrollTop = msgs.scrollHeight; }
+
+  /* ── GREET ── */
+  async function greet() {
+    stage = "welcome";
+    await vic(
+      "Good day. I am <strong>Victoria</strong>, the legal intake assistant for Sterling Law Group. " +
+      "I can provide general information about our practice areas, answer questions about the firm, " +
+      "or help you schedule a confidential consultation with one of our attorneys.<br><br>" +
+      "Please note that our conversation is <strong>strictly confidential</strong>, and nothing discussed here constitutes legal advice. How may I assist you?",
+      ["I Need Legal Help", "Our Practice Areas", "Schedule a Consultation", "Fees and Consultations", "About Sterling Law Group"],
+      650
+    );
+  }
+
+  /* ── MAIN ROUTER ── */
+  async function route(txt) {
+    const t = txt.toLowerCase();
+
+    if (t.includes("back") || t.includes("main menu") || t.includes("start over")) {
+      stage = "welcome";
+      await vic("Of course. How else may I assist you?",
+        ["I Need Legal Help","Our Practice Areas","Schedule a Consultation","Fees and Consultations","About Sterling Law Group"]); return;
+    }
+    if (t.includes("thank") || t.includes("bye") || t.includes("goodbye") || t.includes("that is all") || t.includes("no thank")) {
+      await vic("Thank you for contacting Sterling Law Group. We are here whenever you need us. Wishing you a productive day.", [], 600);
+      stage = "welcome"; return;
+    }
+
+    /* Top-level menu */
+    if (t.includes("i need legal") || t.includes("legal help") || t.includes("need help")) {
+      await startIntake(); return;
+    }
+    if (t.includes("practice area") || t.includes("what do you") || t.includes("services") || t.includes("areas of")) {
+      await showAreas(); return;
+    }
+    if (t.includes("schedule") || t.includes("consultation") || t.includes("appointment") || t.includes("book")) {
+      await startBooking(); return;
+    }
+    if (t.includes("fee") || t.includes("cost") || t.includes("price") || t.includes("how much") || t.includes("free consult")) {
+      await showFees(); return;
+    }
+    if (t.includes("about") || t.includes("who are") || t.includes("sterling law") || t.includes("firm")) {
+      await aboutFirm(); return;
+    }
+
+    /* Practice area quick-hits */
+    const matchedArea = AREAS.find(a => t.includes(a.name.toLowerCase().split(" ")[0]));
+    if (matchedArea) { await areaDetail(matchedArea); return; }
+
+    /* Stage routing */
+    switch(stage) {
+      case "intake_describe": await handleIntakeDesc(txt); break;
+      case "intake_name":     await handleIntakeName(txt); break;
+      case "intake_phone":    await handleIntakePhone(txt); break;
+      case "intake_email":    await handleIntakeEmail(txt); break;
+      case "intake_done":     await handleIntakeDone(txt); break;
+      case "book_area":       await handleBookArea(txt); break;
+      case "book_date":       await handleBookDate(txt); break;
+      case "book_time":       await handleBookTime(txt); break;
+      case "book_name":       await handleBookName(txt); break;
+      case "book_phone":      await handleBookPhone(txt); break;
+      case "book_done":       await handleBookDone(txt); break;
+      default:                await fallback(txt); break;
+    }
+  }
+
+  /* ── PRACTICE AREAS ── */
+  async function showAreas() {
+    stage = "welcome";
+    let html = "Sterling Law Group handles matters across seven practice areas. Select one to learn more:<br><br>";
+    AREAS.forEach(a => {
+      html += `<strong>${a.name}</strong> — Consultation: ${a.consult}<br>`;
+    });
+    await vic(html, [...AREAS.map(a => a.name), "Schedule a Consultation", "Back to Menu"]);
+  }
+
+  async function areaDetail(area) {
+    stage = "welcome";
+    const details = {
+      "Personal Injury":
+        "We represent clients in car accidents, workplace injuries, slip-and-fall incidents, and medical malpractice claims. " +
+        "We operate on a <strong>contingency fee basis</strong> — you pay absolutely nothing unless we recover compensation on your behalf. " +
+        "Initial consultations are free and fully confidential.",
+      "Family Law":
+        "Our family law team handles divorce, child custody, child support, spousal maintenance, adoption, and prenuptial agreements. " +
+        "We approach sensitive family matters with both legal precision and genuine empathy. " +
+        "Consultations are $200 for 60 minutes.",
+      "Criminal Defense":
+        "Facing criminal charges is serious, and you deserve experienced, aggressive representation. " +
+        "We defend clients at every stage from arraignment through trial, covering DUI, drug offenses, assault, theft, and white-collar matters. " +
+        "Free initial consultations available.",
+      "Business Law":
+        "We advise businesses at every stage — from formation and contract drafting through commercial disputes, mergers, and compliance. " +
+        "Retainer arrangements are available for ongoing business clients. " +
+        "Consultations are $250 for 60 minutes.",
+      "Real Estate Law":
+        "Our real estate attorneys handle residential and commercial transactions, title disputes, landlord-tenant conflicts, zoning matters, and foreclosure defense. " +
+        "Fixed-fee services are available for standard transactions. " +
+        "Consultations are $150 for 45 minutes.",
+      "Immigration Law":
+        "We guide individuals and families through visa applications, green cards, citizenship proceedings, asylum claims, and deportation defense. " +
+        "Payment plans are available. Consultations are $200 for 60 minutes.",
+      "Estate Planning":
+        "We draft wills, trusts, powers of attorney, healthcare directives, and handle probate and estate administration. " +
+        "Fixed-fee packages start from $500. Free initial consultations available."
+    };
+    await vic(
+      `<strong>${area.name}</strong><br><br>${details[area.name] || "Our team handles all aspects of " + area.name + " with the precision and dedication our clients deserve."}`,
+      ["Schedule a Consultation", "View All Practice Areas", "Back to Menu"]
+    );
+  }
+
+  /* ── FEES ── */
+  async function showFees() {
+    stage = "welcome";
+    let html = "Here is a summary of our consultation fees:<br><br>";
+    AREAS.forEach(a => {
+      html += `<strong>${a.name}:</strong> ${a.consult}<br>`;
+    });
+    html += "<br>Personal injury and criminal defense consultations are always free. For all other matters, consultation fees are credited toward your case if you retain our firm.";
+    await vic(html, ["Schedule a Consultation", "View Practice Areas", "Back to Menu"]);
+  }
+
+  /* ── ABOUT ── */
+  async function aboutFirm() {
+    stage = "welcome";
+    await vic(
+      "Sterling Law Group has provided dedicated legal representation since <strong>1998</strong>. " +
+      "Over 25 years, our attorneys have recovered more than <strong>$380 million</strong> for clients and successfully represented over <strong>4,800</strong> individuals, families, and businesses.<br><br>" +
+      "Our team includes former prosecutors, federal litigators, and specialists across all seven practice areas. " +
+      "We maintain a <strong>97% case success rate</strong> and an absolute commitment to client confidentiality at every stage of every matter.<br><br>" +
+      "We are located at 300 Sterling Plaza, Suite 1800. Office hours are Monday to Friday, 8:00 AM to 6:00 PM, with a 24-hour emergency line available.",
+      ["Schedule a Consultation", "Our Practice Areas", "Back to Menu"]
+    );
+  }
+
+  /* ── INTAKE (I Need Legal Help) ── */
+  async function startIntake() {
+    stage = "intake_describe";
+    intake = {};
+    await vic(
+      "I am here to help you find the right attorney for your situation. " +
+      "To connect you with the most suitable member of our team, could you briefly describe the nature of your legal matter? " +
+      "Everything you share is <strong>strictly confidential</strong>."
+    );
+  }
+
+  async function handleIntakeDesc(txt) {
+    intake.description = txt;
+    const t = txt.toLowerCase();
+
+    let matched = null;
+    if (t.includes("accident") || t.includes("injury") || t.includes("hurt") || t.includes("crash") || t.includes("medical")) matched = AREAS[0];
+    else if (t.includes("divorce") || t.includes("custody") || t.includes("child") || t.includes("marriage") || t.includes("separation")) matched = AREAS[1];
+    else if (t.includes("criminal") || t.includes("arrest") || t.includes("charge") || t.includes("dui") || t.includes("drug")) matched = AREAS[2];
+    else if (t.includes("business") || t.includes("contract") || t.includes("company") || t.includes("commercial")) matched = AREAS[3];
+    else if (t.includes("property") || t.includes("landlord") || t.includes("tenant") || t.includes("real estate") || t.includes("house")) matched = AREAS[4];
+    else if (t.includes("visa") || t.includes("immigra") || t.includes("citizenship") || t.includes("green card") || t.includes("deport")) matched = AREAS[5];
+    else if (t.includes("will") || t.includes("trust") || t.includes("estate") || t.includes("probate") || t.includes("inheritance")) matched = AREAS[6];
+
+    selectedArea = matched;
+
+    if (matched) {
+      stage = "intake_name";
+      await vic(
+        `Based on what you have described, this appears to fall under our <strong>${matched.name}</strong> practice. ` +
+        `Our ${matched.name} team is highly experienced in exactly this area.<br><br>` +
+        `The consultation fee for ${matched.name} matters is <strong>${matched.consult}</strong>. ` +
+        `To connect you with the right attorney, may I take your full name?`
+      );
+    } else {
+      stage = "intake_name";
+      await vic(
+        "Thank you for sharing that. Our attorneys handle a broad range of legal matters and I am confident we can assist you. " +
+        "To ensure the right attorney reviews your situation, may I take your full name?"
+      );
+    }
+  }
+
+  async function handleIntakeName(txt) {
+    intake.name = txt;
+    stage = "intake_phone";
+    await vic(`Thank you, ${txt.split(" ")[0]}. What is the best telephone number to reach you?`);
+  }
+
+  async function handleIntakePhone(txt) {
+    intake.phone = txt;
+    stage = "intake_email";
+    await vic("And your email address, so we can send you confirmation and any relevant information ahead of your consultation?");
+  }
+
+  async function handleIntakeEmail(txt) {
+    intake.email = txt;
+    stage = "intake_done";
+    const area = selectedArea ? selectedArea.name : "General Legal Matter";
+    const fee  = selectedArea ? selectedArea.consult : "to be confirmed";
+    await vic(
+      `Thank you. Here is a summary of your intake request:<br><br>` +
+      `Name: <strong>${intake.name}</strong><br>` +
+      `Phone: <strong>${intake.phone}</strong><br>` +
+      `Email: <strong>${intake.email}</strong><br>` +
+      `Matter: <strong>${area}</strong><br>` +
+      `Consultation fee: <strong>${fee}</strong><br><br>` +
+      `A member of our team will contact you within <strong>2 business hours</strong> to confirm your appointment. ` +
+      `All information provided is protected by strict confidentiality protocols. Is there anything else I can assist you with?`,
+      ["Schedule a Specific Date", "Learn About Fees", "Back to Menu", "That is all, thank you"]
+    );
+  }
+
+  async function handleIntakeDone(txt) {
+    const t = txt.toLowerCase();
+    if (t.includes("schedule") || t.includes("specific date")) { await startBooking(); return; }
+    if (t.includes("fee") || t.includes("cost")) { await showFees(); return; }
+    if (t.includes("back") || t.includes("menu")) { stage = "welcome"; await greet(); return; }
+    await vic("You are most welcome. Sterling Law Group looks forward to assisting you. Have a productive day.", [], 600);
+    stage = "welcome";
+  }
+
+  /* ── BOOKING ── */
+  async function startBooking() {
+    stage = "book_area";
+    booking = {};
+    await vic(
+      "I would be glad to schedule a consultation for you. Which practice area does your matter relate to?",
+      [...AREAS.map(a => a.name), "Not Sure Yet"]
+    );
+  }
+
+  async function handleBookArea(txt) {
+    booking.area = txt;
+    const matched = AREAS.find(a => txt.toLowerCase().includes(a.name.toLowerCase().split(" ")[0]));
+    const fee = matched ? matched.consult : "to be confirmed by our team";
+    stage = "book_date";
+    await vic(
+      `<strong>${txt}</strong> — noted. The consultation fee for this area is <strong>${fee}</strong>.<br><br>` +
+      `Our attorneys are available Monday to Friday, 8:00 AM to 6:00 PM, and Saturday by appointment. ` +
+      `What date works best for you?`
+    );
+  }
+
+  async function handleBookDate(txt) {
+    booking.date = txt;
+    stage = "book_time";
+    await vic(`${txt} — understood. What time would you prefer?`,
+      ["8:00 AM", "10:00 AM", "12:00 PM", "2:00 PM", "4:00 PM", "Saturday Morning"]);
+  }
+
+  async function handleBookTime(txt) {
+    booking.time = txt;
+    stage = "book_name";
+    await vic(`${txt} is noted. May I have your full name?`);
+  }
+
+  async function handleBookName(txt) {
+    booking.clientName = txt;
+    stage = "book_phone";
+    await vic(`Thank you, ${txt.split(" ")[0]}. And your contact telephone number?`);
+  }
+
+  async function handleBookPhone(txt) {
+    booking.phone = txt;
+    stage = "book_done";
+    await vic(
+      `Your consultation has been scheduled. Here is your confirmation:<br><br>` +
+      `Practice Area: <strong>${booking.area}</strong><br>` +
+      `Date: <strong>${booking.date}</strong><br>` +
+      `Time: <strong>${booking.time}</strong><br>` +
+      `Name: <strong>${booking.clientName}</strong><br>` +
+      `Contact: <strong>${booking.phone}</strong><br><br>` +
+      `A confirmation email will be sent to you shortly, and an attorney will review your matter in advance of your appointment. ` +
+      `Please arrive 10 minutes early for your first visit. All consultations are <strong>strictly confidential</strong>.<br><br>` +
+      `Is there anything else I can assist you with?`,
+      ["Learn About Our Firm", "View Practice Areas", "Back to Menu", "That is all, thank you"]
+    );
+  }
+
+  async function handleBookDone(txt) {
+    const t = txt.toLowerCase();
+    if (t.includes("firm") || t.includes("about")) { await aboutFirm(); return; }
+    if (t.includes("practice") || t.includes("area")) { await showAreas(); return; }
+    if (t.includes("back") || t.includes("menu")) { stage = "welcome"; await greet(); return; }
+    await vic("Excellent. We look forward to meeting with you. Sterling Law Group is committed to protecting your rights and achieving the result you deserve. Have a wonderful day.", [], 700);
+    stage = "welcome";
+  }
+
+  /* ── FALLBACK ── */
+  async function fallback(txt) {
+    const t = txt.toLowerCase();
+    if (t.includes("emergency") || t.includes("urgent") || t.includes("arrested") || t.includes("tonight")) {
+      await vic(
+        "For urgent legal matters or after-hours emergencies, please call our <strong>24-hour emergency line</strong> immediately.<br><br>" +
+        "Phone: <strong>(555) 400-7200</strong><br><br>" +
+        "An on-call attorney is available at all times for matters that cannot wait until business hours.",
+        ["Schedule a Consultation", "Back to Menu"]
+      ); return;
+    }
+    if (t.includes("contact") || t.includes("address") || t.includes("office") || t.includes("phone") || t.includes("email") || t.includes("where")) {
+      await vic(
+        "You can reach Sterling Law Group through the following:<br><br>" +
+        "Phone: <strong>(555) 400-7200</strong><br>" +
+        "Email: <strong>consult@sterlinglawgroup.com</strong><br>" +
+        "Address: <strong>300 Sterling Plaza, Suite 1800</strong><br>" +
+        "Hours: <strong>Monday to Friday, 8:00 AM to 6:00 PM</strong><br>" +
+        "Emergency line: <strong>Available 24 hours</strong>",
+        ["Schedule a Consultation", "Back to Menu"]
+      ); return;
+    }
+    if (t.includes("confidential") || t.includes("private") || t.includes("secret") || t.includes("safe")) {
+      await vic(
+        "All communications with Sterling Law Group are protected by <strong>attorney-client privilege</strong> and our strict confidentiality protocols. " +
+        "Nothing you share with us — through this chat, by telephone, or in person — will ever be disclosed to any third party without your express consent. " +
+        "You can speak freely.",
+        ["I Need Legal Help", "Schedule a Consultation", "Back to Menu"]
+      ); return;
+    }
+    await vic(
+      "I want to ensure I direct you to the right place. Could you tell me a little more about what you need, or select an option below?",
+      ["I Need Legal Help", "Our Practice Areas", "Schedule a Consultation", "About the Firm"]
+    );
+  }
+
+  /* ── PAGE JS ── */
+  // Scroll reveal
+  document.querySelectorAll('.reveal').forEach(el => {
+    new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 }).observe(el);
+  });
+
+  // Sticky nav shadow
+  const navbar = document.getElementById('navbar');
+  if (navbar) window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 60); });
+
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  }
+  window.closeMobile = function() { if (mobileMenu) mobileMenu.classList.remove('open'); };
+
+  // Stagger practice card delays
+  document.querySelectorAll('.practice-card').forEach((c, i) => { c.style.transitionDelay = (i * 0.07) + 's'; });
+
+  // Chat nudge
+  const nudge = document.getElementById('chatNudge');
+  if (nudge) {
+    setTimeout(() => nudge.classList.add('show'), 5000);
+    const nc = document.getElementById('nudgeClose');
+    if (nc) nc.addEventListener('click', e => { e.stopPropagation(); nudge.classList.remove('show'); });
+    nudge.addEventListener('click', () => { widget.classList.add('open'); nudge.classList.remove('show'); if (msgs.children.length === 0) setTimeout(greet, 380); });
+  }
+
+})();
+</script>
 
   <!-- JS: Scroll effects, nav, nudge -->
   <script>
