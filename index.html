@@ -7,1151 +7,299 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
   <style>
-    /* ============================================================
-       CSS CUSTOM PROPERTIES
-    ============================================================ */
     :root {
-      --navy:       #0b1b38;
-      --navy-mid:   #112248;
-      --navy-light: #1a3363;
-      --gold:       #b89a4e;
-      --gold-light: #d4b96a;
-      --gold-pale:  #e8d5a0;
-      --white:      #ffffff;
-      --off-white:  #f7f5f0;
-      --text-muted: #8a9ab5;
-      --border:     rgba(184,154,78,0.25);
-
+      --navy: #0b1b38; --navy-mid: #112248; --navy-light: #1a3363;
+      --gold: #b89a4e; --gold-light: #d4b96a; --gold-pale: #e8d5a0;
+      --white: #ffffff; --off-white: #f7f5f0; --text-muted: #8a9ab5;
+      --border: rgba(184,154,78,0.25);
       --font-display: 'Cormorant Garamond', Georgia, serif;
-      --font-body:    'Montserrat', sans-serif;
-
-      --section-pad: 100px 0;
-      --container:   1160px;
-      --radius:      3px;
+      --font-body: 'Montserrat', sans-serif;
+      --section-pad: 100px 0; --container: 1160px; --radius: 3px;
     }
-
-    /* ============================================================
-       RESET & BASE
-    ============================================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; font-size: 16px; }
-
-    body {
-      font-family: var(--font-body);
-      background: var(--white);
-      color: var(--navy);
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
-
+    body { font-family: var(--font-body); background: var(--white); color: var(--navy); line-height: 1.7; overflow-x: hidden; }
     img { display: block; max-width: 100%; }
-    a  { text-decoration: none; color: inherit; }
+    a { text-decoration: none; color: inherit; }
     ul { list-style: none; }
-
-    .container {
-      max-width: var(--container);
-      margin: 0 auto;
-      padding: 0 32px;
-    }
-
-    /* ============================================================
-       UTILITY
-    ============================================================ */
-    .gold  { color: var(--gold); }
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 32px; }
+    .gold { color: var(--gold); }
     .gold-italic { color: var(--gold); font-style: italic; }
 
-    .btn-primary {
-      display: inline-block;
-      padding: 15px 38px;
-      background: var(--gold);
-      color: var(--navy);
-      font-family: var(--font-body);
-      font-weight: 600;
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      border-radius: var(--radius);
-      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
-    }
-    .btn-primary:hover {
-      background: var(--gold-light);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(184,154,78,0.35);
-    }
-
-    .btn-outline {
-      display: inline-block;
-      padding: 14px 36px;
-      border: 1.5px solid var(--gold);
-      color: var(--gold);
-      font-family: var(--font-body);
-      font-weight: 600;
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      border-radius: var(--radius);
-      transition: background 0.3s, color 0.3s, transform 0.2s;
-    }
-    .btn-outline:hover {
-      background: var(--gold);
-      color: var(--navy);
-      transform: translateY(-2px);
-    }
-
-    .section-label {
-      display: inline-block;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 18px;
-    }
-
-    .divider-gold {
-      width: 52px;
-      height: 2px;
-      background: linear-gradient(90deg, var(--gold), transparent);
-      margin: 18px 0 32px;
-    }
-
+    .btn-primary { display: inline-block; padding: 15px 38px; background: var(--gold); color: var(--navy); font-family: var(--font-body); font-weight: 600; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; border-radius: var(--radius); transition: background 0.3s, transform 0.2s, box-shadow 0.3s; }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(184,154,78,0.35); }
+    .btn-outline { display: inline-block; padding: 14px 36px; border: 1.5px solid var(--gold); color: var(--gold); font-family: var(--font-body); font-weight: 600; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; border-radius: var(--radius); transition: background 0.3s, color 0.3s, transform 0.2s; }
+    .btn-outline:hover { background: var(--gold); color: var(--navy); transform: translateY(-2px); }
+    .section-label { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+    .divider-gold { width: 52px; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); margin: 18px 0 32px; }
     .divider-gold.center { margin: 18px auto 32px; }
 
-    /* ============================================================
-       SCROLL REVEAL
-    ============================================================ */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* ============================================================
-       ANNOUNCEMENT BAR
-    ============================================================ */
-    .announcement-bar {
-      background: var(--navy);
-      color: var(--gold-pale);
-      text-align: center;
-      font-size: 0.7rem;
-      letter-spacing: 0.14em;
-      font-weight: 500;
-      padding: 10px 16px;
-      border-bottom: 1px solid var(--border);
-    }
+    .announcement-bar { background: var(--navy); color: var(--gold-pale); text-align: center; font-size: 0.7rem; letter-spacing: 0.14em; font-weight: 500; padding: 10px 16px; border-bottom: 1px solid var(--border); }
     .announcement-bar span { color: var(--gold-light); }
 
-    /* ============================================================
-       NAVIGATION
-    ============================================================ */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(11,27,56,0.97);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      transition: box-shadow 0.3s;
-    }
+    nav { position: sticky; top: 0; z-index: 1000; background: rgba(11,27,56,0.97); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); transition: box-shadow 0.3s; }
     nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.35); }
-
-    .nav-inner {
-      max-width: var(--container);
-      margin: 0 auto;
-      padding: 0 32px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 76px;
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .nav-logo-mark {
-      width: 42px;
-      height: 42px;
-      border: 1.5px solid var(--gold);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
+    .nav-inner { max-width: var(--container); margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; height: 76px; }
+    .nav-logo { display: flex; align-items: center; gap: 14px; }
+    .nav-logo-mark { width: 42px; height: 42px; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .nav-logo-mark svg { width: 22px; height: 22px; }
-
     .nav-logo-text { line-height: 1.2; }
-    .nav-logo-text strong {
-      display: block;
-      font-family: var(--font-display);
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--white);
-      letter-spacing: 0.04em;
-    }
-    .nav-logo-text span {
-      display: block;
-      font-size: 0.6rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 500;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 36px;
-    }
-    .nav-links a {
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.75);
-      transition: color 0.25s;
-      position: relative;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0; right: 0;
-      height: 1px;
-      background: var(--gold);
-      transform: scaleX(0);
-      transition: transform 0.25s;
-    }
+    .nav-logo-text strong { display: block; font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; color: var(--white); letter-spacing: 0.04em; }
+    .nav-logo-text span { display: block; font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+    .nav-links { display: flex; align-items: center; gap: 36px; }
+    .nav-links a { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.75); transition: color 0.25s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1px; background: var(--gold); transform: scaleX(0); transition: transform 0.25s; }
     .nav-links a:hover { color: var(--white); }
     .nav-links a:hover::after { transform: scaleX(1); }
-
-    .nav-cta {
-      padding: 10px 26px;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-    }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 4px;
-    }
-    .hamburger span {
-      display: block;
-      width: 24px;
-      height: 1.5px;
-      background: var(--gold);
-      transition: transform 0.3s, opacity 0.3s;
-    }
-
-    /* ============================================================
-       HERO
-    ============================================================ */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-      background: var(--navy);
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1800&q=80&fit=crop');
-      background-size: cover;
-      background-position: center 30%;
-      opacity: 0.18;
-    }
-
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        105deg,
-        rgba(11,27,56,0.97) 0%,
-        rgba(11,27,56,0.88) 50%,
-        rgba(11,27,56,0.60) 100%
-      );
-    }
-
-    /* decorative vertical lines */
-    .hero-lines {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-    .hero-lines::before,
-    .hero-lines::after {
-      content: '';
-      position: absolute;
-      top: 0; bottom: 0;
-      width: 1px;
-      background: linear-gradient(180deg, transparent, var(--border), transparent);
-    }
-    .hero-lines::before { left: 22%; }
-    .hero-lines::after  { right: 22%; }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: var(--container);
-      margin: 0 auto;
-      padding: 120px 32px 100px;
-      max-width: 740px;
-    }
-
-    .hero-eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 28px;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.2s forwards;
-    }
-    .hero-eyebrow-line {
-      width: 36px;
-      height: 1px;
-      background: var(--gold);
-    }
-    .hero-eyebrow span {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--gold);
-    }
-
-    .hero h1 {
-      font-family: var(--font-display);
-      font-size: clamp(2.6rem, 5.5vw, 4.4rem);
-      font-weight: 600;
-      color: var(--white);
-      line-height: 1.12;
-      margin-bottom: 26px;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.35s forwards;
-    }
-    .hero h1 em {
-      color: var(--gold);
-      font-style: italic;
-    }
-
-    .hero-desc {
-      font-size: 1.0rem;
-      color: rgba(255,255,255,0.72);
-      max-width: 520px;
-      margin-bottom: 44px;
-      line-height: 1.8;
-      font-weight: 300;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.5s forwards;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.65s forwards;
-    }
-
-    .hero-stats {
-      display: flex;
-      gap: 48px;
-      margin-top: 72px;
-      padding-top: 40px;
-      border-top: 1px solid var(--border);
-      opacity: 0;
-      animation: fadeUp 0.8s ease 0.8s forwards;
-    }
-    .hero-stat-num {
-      font-family: var(--font-display);
-      font-size: 2.4rem;
-      font-weight: 600;
-      color: var(--gold);
-      line-height: 1;
-      display: block;
-    }
-    .hero-stat-label {
-      font-size: 0.65rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-      margin-top: 6px;
-      display: block;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(22px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* scrolling ticker */
-    .hero-ticker {
-      position: absolute;
-      bottom: 0;
-      left: 0; right: 0;
-      background: rgba(184,154,78,0.12);
-      border-top: 1px solid var(--border);
-      overflow: hidden;
-      height: 44px;
-      display: flex;
-      align-items: center;
-    }
-    .ticker-track {
-      display: flex;
-      white-space: nowrap;
-      animation: ticker 28s linear infinite;
-    }
-    .ticker-track span {
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold-pale);
-      padding: 0 40px;
-    }
-    .ticker-track span::before {
-      content: '—';
-      margin-right: 16px;
-      color: var(--gold);
-    }
-    @keyframes ticker {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
-
-    /* ============================================================
-       ABOUT / INTRO STRIP
-    ============================================================ */
-    .intro {
-      background: var(--off-white);
-      padding: 72px 0;
-      border-bottom: 1px solid rgba(0,0,0,0.07);
-    }
-    .intro-inner {
-      display: flex;
-      align-items: center;
-      gap: 64px;
-    }
-    .intro-badge {
-      flex-shrink: 0;
-      width: 120px;
-      height: 120px;
-      border: 1.5px solid var(--gold);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-    .intro-badge strong {
-      font-family: var(--font-display);
-      font-size: 2.6rem;
-      font-weight: 700;
-      color: var(--navy);
-      line-height: 1;
-    }
-    .intro-badge span {
-      font-size: 0.58rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 600;
-    }
-    .intro-text h2 {
-      font-family: var(--font-display);
-      font-size: 1.9rem;
-      font-weight: 600;
-      color: var(--navy);
-      margin-bottom: 12px;
-      line-height: 1.3;
-    }
-    .intro-text p {
-      font-size: 0.9rem;
-      color: #4a5568;
-      max-width: 620px;
-      line-height: 1.9;
-    }
-
-    /* ============================================================
-       PRACTICE AREAS
-    ============================================================ */
-    .practice {
-      padding: var(--section-pad);
-      background: var(--white);
-    }
-    .practice-header {
-      text-align: center;
-      margin-bottom: 62px;
-    }
-    .practice-header h2 {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 600;
-      color: var(--navy);
-      line-height: 1.2;
-    }
-
-    .practice-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: 2px;
-      background: rgba(0,0,0,0.06);
-    }
-
-    .practice-card {
-      background: var(--white);
-      padding: 44px 36px;
-      position: relative;
-      overflow: hidden;
-      transition: background 0.35s;
-      cursor: default;
-    }
-    .practice-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 3px;
-      height: 0;
-      background: var(--gold);
-      transition: height 0.4s ease;
-    }
-    .practice-card:hover { background: var(--navy); }
-    .practice-card:hover::before { height: 100%; }
-    .practice-card:hover .pc-num,
-    .practice-card:hover h3,
-    .practice-card:hover p { color: var(--white); }
-    .practice-card:hover .pc-num { color: var(--gold); }
-
-    .pc-num {
-      font-family: var(--font-display);
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--gold);
-      letter-spacing: 0.2em;
-      margin-bottom: 18px;
-      display: block;
-      transition: color 0.3s;
-    }
-    .practice-card h3 {
-      font-family: var(--font-display);
-      font-size: 1.35rem;
-      font-weight: 600;
-      color: var(--navy);
-      margin-bottom: 12px;
-      transition: color 0.3s;
-    }
-    .practice-card p {
-      font-size: 0.84rem;
-      color: #5a6880;
-      line-height: 1.8;
-      transition: color 0.3s;
-    }
-
-    /* ============================================================
-       WHY CHOOSE US
-    ============================================================ */
-    .why {
-      padding: var(--section-pad);
-      background: var(--navy);
-      position: relative;
-      overflow: hidden;
-    }
-    .why::before {
-      content: '';
-      position: absolute;
-      top: -100px; right: -100px;
-      width: 500px; height: 500px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(184,154,78,0.06), transparent 70%);
-      pointer-events: none;
-    }
-
-    .why-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .why-left h2 {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 600;
-      color: var(--white);
-      line-height: 1.2;
-      margin-bottom: 20px;
-    }
-    .why-left p {
-      font-size: 0.88rem;
-      color: rgba(255,255,255,0.62);
-      line-height: 1.9;
-      margin-bottom: 36px;
-    }
-
-    .why-items { display: flex; flex-direction: column; gap: 28px; }
-
-    .why-item {
-      display: flex;
-      gap: 22px;
-      align-items: flex-start;
-    }
-    .why-icon {
-      width: 48px;
-      height: 48px;
-      border: 1px solid var(--border);
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .why-icon svg { width: 22px; height: 22px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
-
-    .why-item h4 {
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: var(--white);
-      margin-bottom: 5px;
-    }
-    .why-item p {
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.7;
-    }
-
-    .why-image {
-      position: relative;
-    }
-    .why-image img {
-      width: 100%;
-      height: 520px;
-      object-fit: cover;
-      filter: brightness(0.85) saturate(0.7);
-    }
-    .why-image-overlay {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 32px;
-      background: linear-gradient(0deg, rgba(11,27,56,0.94) 0%, transparent 100%);
-    }
-    .why-image-stat {
-      font-family: var(--font-display);
-      font-size: 2.6rem;
-      color: var(--gold);
-      font-weight: 700;
-      line-height: 1;
-      display: block;
-    }
-    .why-image-stat-label {
-      font-size: 0.65rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
-      margin-top: 6px;
-      display: block;
-    }
-    .why-image-border {
-      position: absolute;
-      top: 20px; right: -20px;
-      width: calc(100% - 20px);
-      height: calc(100% - 20px);
-      border: 1.5px solid var(--border);
-      pointer-events: none;
-    }
-
-    /* ============================================================
-       TESTIMONIALS
-    ============================================================ */
-    .testimonials {
-      padding: var(--section-pad);
-      background: var(--off-white);
-    }
-    .testimonials-header {
-      text-align: center;
-      margin-bottom: 56px;
-    }
-    .testimonials-header h2 {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 600;
-      color: var(--navy);
-      line-height: 1.2;
-    }
-
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-    }
-
-    .tcard {
-      background: var(--white);
-      padding: 44px 36px;
-      border-bottom: 3px solid transparent;
-      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
-      position: relative;
-    }
-    .tcard:hover {
-      border-color: var(--gold);
-      box-shadow: 0 12px 44px rgba(0,0,0,0.08);
-      transform: translateY(-4px);
-    }
-
-    .tcard-stars {
-      display: flex;
-      gap: 4px;
-      margin-bottom: 22px;
-    }
-    .tcard-stars span {
-      width: 10px;
-      height: 10px;
-      background: var(--gold);
-      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-    }
-
-    .tcard-quote {
-      font-family: var(--font-display);
-      font-size: 3.5rem;
-      color: var(--gold-pale);
-      line-height: 0.5;
-      margin-bottom: 16px;
-      display: block;
-    }
-
-    .tcard p {
-      font-size: 0.88rem;
-      color: #4a5568;
-      line-height: 1.85;
-      margin-bottom: 28px;
-      font-style: italic;
-    }
-
-    .tcard-author {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding-top: 22px;
-      border-top: 1px solid rgba(0,0,0,0.07);
-    }
-    .tcard-initials {
-      width: 40px;
-      height: 40px;
-      background: var(--navy);
-      color: var(--gold);
-      font-family: var(--font-display);
-      font-size: 1rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .tcard-name {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--navy);
-      display: block;
-    }
-    .tcard-role {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      letter-spacing: 0.06em;
-    }
-
-    /* ============================================================
-       CTA SECTION
-    ============================================================ */
-    .cta {
-      padding: 110px 0;
-      background: var(--navy);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .cta::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1600&q=80&fit=crop');
-      background-size: cover;
-      background-position: center;
-      opacity: 0.07;
-    }
-    .cta-content { position: relative; z-index: 1; }
-    .cta h2 {
-      font-family: var(--font-display);
-      font-size: clamp(2.2rem, 4.5vw, 3.4rem);
-      font-weight: 600;
-      color: var(--white);
-      max-width: 640px;
-      margin: 0 auto 16px;
-      line-height: 1.2;
-    }
-    .cta p {
-      font-size: 0.92rem;
-      color: rgba(255,255,255,0.58);
-      max-width: 500px;
-      margin: 0 auto 44px;
-      line-height: 1.8;
-    }
-    .cta-actions { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
-
-    /* ============================================================
-       CONTACT BAR
-    ============================================================ */
-    .contact-bar {
-      background: var(--gold);
-      padding: 22px 0;
-    }
-    .contact-bar-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    .contact-info {
-      display: flex;
-      gap: 48px;
-      flex-wrap: wrap;
-    }
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .contact-item svg {
-      width: 16px; height: 16px;
-      stroke: var(--navy);
-      fill: none;
-      stroke-width: 2;
-      flex-shrink: 0;
-    }
-    .contact-item span {
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--navy);
-      letter-spacing: 0.04em;
-    }
-
-    /* ============================================================
-       FOOTER
-    ============================================================ */
-    footer {
-      background: #060f1e;
-      color: rgba(255,255,255,0.6);
-      padding: 72px 0 32px;
-    }
-    .footer-top {
-      display: grid;
-      grid-template-columns: 1.6fr 1fr 1fr 1fr;
-      gap: 48px;
-      padding-bottom: 52px;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      margin-bottom: 32px;
-    }
-    .footer-brand strong {
-      display: block;
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--white);
-      margin-bottom: 6px;
-    }
-    .footer-brand .tagline {
-      font-size: 0.62rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 18px;
-    }
-    .footer-brand p {
-      font-size: 0.82rem;
-      line-height: 1.8;
-      color: rgba(255,255,255,0.45);
-      max-width: 280px;
-    }
-    .footer-col h4 {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 18px;
-    }
-    .footer-col li {
-      margin-bottom: 10px;
-    }
-    .footer-col a {
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.5);
-      transition: color 0.2s;
-    }
-    .footer-col a:hover { color: var(--gold-light); }
-
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .footer-bottom p { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
-    .footer-disclaimer {
-      font-size: 0.68rem;
-      color: rgba(255,255,255,0.22);
-      max-width: 560px;
-      text-align: right;
-      line-height: 1.6;
-    }
-
-    /* ============================================================
-       CHATBOT NUDGE
-    ============================================================ */
-    .chat-nudge {
-      position: fixed;
-      bottom: 96px;
-      right: 24px;
-      background: var(--navy);
-      border: 1px solid var(--border);
-      color: var(--white);
-      padding: 12px 18px 12px 14px;
-      font-size: 0.78rem;
-      font-weight: 500;
-      border-radius: 3px;
-      box-shadow: 0 6px 30px rgba(0,0,0,0.4);
-      z-index: 9998;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.5s, transform 0.5s;
-      cursor: pointer;
-      max-width: 240px;
-    }
-    .chat-nudge.show { opacity: 1; transform: translateY(0); }
-    .chat-nudge-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: #3fcf8e;
-      flex-shrink: 0;
-      animation: pulse 2s infinite;
-    }
-    .chat-nudge-close {
-      margin-left: auto;
-      opacity: 0.4;
-      font-size: 0.7rem;
-      cursor: pointer;
-    }
-    .chat-nudge-close:hover { opacity: 1; }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50%       { transform: scale(1.4); opacity: 0.7; }
-    }
-
-    /* ============================================================
-       MOBILE NAV
-    ============================================================ */
-    .mobile-menu {
-      display: none;
-      flex-direction: column;
-      gap: 0;
-      background: var(--navy-mid);
-      border-top: 1px solid var(--border);
-      overflow: hidden;
-      max-height: 0;
-      transition: max-height 0.4s ease;
-    }
+    .nav-cta { padding: 10px 26px; font-size: 0.7rem; letter-spacing: 0.12em; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 1.5px; background: var(--gold); transition: transform 0.3s, opacity 0.3s; }
+    .mobile-menu { display: none; flex-direction: column; gap: 0; background: var(--navy-mid); border-top: 1px solid var(--border); overflow: hidden; max-height: 0; transition: max-height 0.4s ease; }
     .mobile-menu.open { max-height: 400px; }
-    .mobile-menu a {
-      padding: 16px 32px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.7);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      display: block;
-      transition: color 0.2s, background 0.2s;
-    }
+    .mobile-menu a { padding: 16px 32px; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7); border-bottom: 1px solid rgba(255,255,255,0.05); display: block; transition: color 0.2s, background 0.2s; }
     .mobile-menu a:hover { color: var(--gold); background: rgba(184,154,78,0.06); }
 
-    /* ============================================================
-       RESPONSIVE
-    ============================================================ */
-    @media (max-width: 900px) {
-      .nav-links, .nav-cta { display: none; }
-      .hamburger { display: flex; }
-      .mobile-menu { display: flex; }
+    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; background: var(--navy); }
+    .hero-bg { position: absolute; inset: 0; background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1800&q=80&fit=crop'); background-size: cover; background-position: center 30%; opacity: 0.18; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(105deg, rgba(11,27,56,0.97) 0%, rgba(11,27,56,0.88) 50%, rgba(11,27,56,0.60) 100%); }
+    .hero-lines { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+    .hero-lines::before, .hero-lines::after { content: ''; position: absolute; top: 0; bottom: 0; width: 1px; background: linear-gradient(180deg, transparent, var(--border), transparent); }
+    .hero-lines::before { left: 22%; }
+    .hero-lines::after { right: 22%; }
+    .hero-content { position: relative; z-index: 2; max-width: 740px; margin: 0 auto; padding: 120px 32px 100px; }
+    .hero-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards; }
+    .hero-eyebrow-line { width: 36px; height: 1px; background: var(--gold); }
+    .hero-eyebrow span { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); }
+    .hero h1 { font-family: var(--font-display); font-size: clamp(2.6rem, 5.5vw, 4.4rem); font-weight: 600; color: var(--white); line-height: 1.12; margin-bottom: 26px; opacity: 0; animation: fadeUp 0.8s ease 0.35s forwards; }
+    .hero h1 em { color: var(--gold); font-style: italic; }
+    .hero-desc { font-size: 1.0rem; color: rgba(255,255,255,0.72); max-width: 520px; margin-bottom: 44px; line-height: 1.8; font-weight: 300; opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards; }
+    .hero-actions { display: flex; gap: 18px; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s ease 0.65s forwards; }
+    .hero-stats { display: flex; gap: 48px; margin-top: 72px; padding-top: 40px; border-top: 1px solid var(--border); opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards; }
+    .hero-stat-num { font-family: var(--font-display); font-size: 2.4rem; font-weight: 600; color: var(--gold); line-height: 1; display: block; }
+    .hero-stat-label { font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 6px; display: block; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-ticker { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(184,154,78,0.12); border-top: 1px solid var(--border); overflow: hidden; height: 44px; display: flex; align-items: center; }
+    .ticker-track { display: flex; white-space: nowrap; animation: ticker 28s linear infinite; }
+    .ticker-track span { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-pale); padding: 0 40px; }
+    .ticker-track span::before { content: '—'; margin-right: 16px; color: var(--gold); }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-      .why-inner { grid-template-columns: 1fr; gap: 48px; }
-      .why-image { display: none; }
+    .intro { background: var(--off-white); padding: 72px 0; border-bottom: 1px solid rgba(0,0,0,0.07); }
+    .intro-inner { display: flex; align-items: center; gap: 64px; }
+    .intro-badge { flex-shrink: 0; width: 120px; height: 120px; border: 1.5px solid var(--gold); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+    .intro-badge strong { font-family: var(--font-display); font-size: 2.6rem; font-weight: 700; color: var(--navy); line-height: 1; }
+    .intro-badge span { font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+    .intro-text h2 { font-family: var(--font-display); font-size: 1.9rem; font-weight: 600; color: var(--navy); margin-bottom: 12px; line-height: 1.3; }
+    .intro-text p { font-size: 0.9rem; color: #4a5568; max-width: 620px; line-height: 1.9; }
 
-      .testimonials-grid { grid-template-columns: 1fr; }
+    .practice { padding: var(--section-pad); background: var(--white); }
+    .practice-header { text-align: center; margin-bottom: 62px; }
+    .practice-header h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; color: var(--navy); line-height: 1.2; }
+    .practice-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 2px; background: rgba(0,0,0,0.06); }
+    .practice-card { background: var(--white); padding: 44px 36px; position: relative; overflow: hidden; transition: background 0.35s; cursor: default; }
+    .practice-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--gold); transition: height 0.4s ease; }
+    .practice-card:hover { background: var(--navy); }
+    .practice-card:hover::before { height: 100%; }
+    .practice-card:hover .pc-num, .practice-card:hover h3, .practice-card:hover p { color: var(--white); }
+    .practice-card:hover .pc-num { color: var(--gold); }
+    .pc-num { font-family: var(--font-display); font-size: 0.75rem; font-weight: 700; color: var(--gold); letter-spacing: 0.2em; margin-bottom: 18px; display: block; transition: color 0.3s; }
+    .practice-card h3 { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; color: var(--navy); margin-bottom: 12px; transition: color 0.3s; }
+    .practice-card p { font-size: 0.84rem; color: #5a6880; line-height: 1.8; transition: color 0.3s; }
 
-      .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
-    }
+    .why { padding: var(--section-pad); background: var(--navy); position: relative; overflow: hidden; }
+    .why::before { content: ''; position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(184,154,78,0.06), transparent 70%); pointer-events: none; }
+    .why-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .why-left h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; color: var(--white); line-height: 1.2; margin-bottom: 20px; }
+    .why-left p { font-size: 0.88rem; color: rgba(255,255,255,0.62); line-height: 1.9; margin-bottom: 36px; }
+    .why-items { display: flex; flex-direction: column; gap: 28px; }
+    .why-item { display: flex; gap: 22px; align-items: flex-start; }
+    .why-icon { width: 48px; height: 48px; border: 1px solid var(--border); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .why-icon svg { width: 22px; height: 22px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+    .why-item h4 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; color: var(--white); margin-bottom: 5px; }
+    .why-item p { font-size: 0.82rem; color: rgba(255,255,255,0.55); line-height: 1.7; }
+    .why-image { position: relative; }
+    .why-image img { width: 100%; height: 520px; object-fit: cover; filter: brightness(0.85) saturate(0.7); }
+    .why-image-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 32px; background: linear-gradient(0deg, rgba(11,27,56,0.94) 0%, transparent 100%); }
+    .why-image-stat { font-family: var(--font-display); font-size: 2.6rem; color: var(--gold); font-weight: 700; line-height: 1; display: block; }
+    .why-image-stat-label { font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-top: 6px; display: block; }
+    .why-image-border { position: absolute; top: 20px; right: -20px; width: calc(100% - 20px); height: calc(100% - 20px); border: 1.5px solid var(--border); pointer-events: none; }
 
-    @media (max-width: 640px) {
-      .hero-stats { flex-direction: column; gap: 24px; }
-      .intro-inner { flex-direction: column; gap: 28px; }
-      .contact-bar-inner { flex-direction: column; align-items: flex-start; }
-      .footer-top { grid-template-columns: 1fr; }
-      .footer-bottom { flex-direction: column; align-items: flex-start; }
-      .footer-disclaimer { text-align: left; }
-    }
+    .testimonials { padding: var(--section-pad); background: var(--off-white); }
+    .testimonials-header { text-align: center; margin-bottom: 56px; }
+    .testimonials-header h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; color: var(--navy); line-height: 1.2; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .tcard { background: var(--white); padding: 44px 36px; border-bottom: 3px solid transparent; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s; position: relative; }
+    .tcard:hover { border-color: var(--gold); box-shadow: 0 12px 44px rgba(0,0,0,0.08); transform: translateY(-4px); }
+    .tcard-stars { display: flex; gap: 4px; margin-bottom: 22px; }
+    .tcard-stars span { width: 10px; height: 10px; background: var(--gold); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
+    .tcard-quote { font-family: var(--font-display); font-size: 3.5rem; color: var(--gold-pale); line-height: 0.5; margin-bottom: 16px; display: block; }
+    .tcard p { font-size: 0.88rem; color: #4a5568; line-height: 1.85; margin-bottom: 28px; font-style: italic; }
+    .tcard-author { display: flex; align-items: center; gap: 14px; padding-top: 22px; border-top: 1px solid rgba(0,0,0,0.07); }
+    .tcard-initials { width: 40px; height: 40px; background: var(--navy); color: var(--gold); font-family: var(--font-display); font-size: 1rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .tcard-name { font-size: 0.82rem; font-weight: 600; color: var(--navy); display: block; }
+    .tcard-role { font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.06em; }
+
+    .cta { padding: 110px 0; background: var(--navy); text-align: center; position: relative; overflow: hidden; }
+    .cta::before { content: ''; position: absolute; inset: 0; background-image: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1600&q=80&fit=crop'); background-size: cover; background-position: center; opacity: 0.07; }
+    .cta-content { position: relative; z-index: 1; }
+    .cta h2 { font-family: var(--font-display); font-size: clamp(2.2rem, 4.5vw, 3.4rem); font-weight: 600; color: var(--white); max-width: 640px; margin: 0 auto 16px; line-height: 1.2; }
+    .cta p { font-size: 0.92rem; color: rgba(255,255,255,0.58); max-width: 500px; margin: 0 auto 44px; line-height: 1.8; }
+    .cta-actions { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+
+    .contact-bar { background: var(--gold); padding: 22px 0; }
+    .contact-bar-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .contact-info { display: flex; gap: 48px; flex-wrap: wrap; }
+    .contact-item { display: flex; align-items: center; gap: 10px; }
+    .contact-item svg { width: 16px; height: 16px; stroke: var(--navy); fill: none; stroke-width: 2; flex-shrink: 0; }
+    .contact-item span { font-size: 0.78rem; font-weight: 600; color: var(--navy); letter-spacing: 0.04em; }
+
+    footer { background: #060f1e; color: rgba(255,255,255,0.6); padding: 72px 0 32px; }
+    .footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 52px; border-bottom: 1px solid rgba(255,255,255,0.07); margin-bottom: 32px; }
+    .footer-brand strong { display: block; font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; color: var(--white); margin-bottom: 6px; }
+    .footer-brand .tagline { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+    .footer-brand p { font-size: 0.82rem; line-height: 1.8; color: rgba(255,255,255,0.45); max-width: 280px; }
+    .footer-col h4 { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+    .footer-col li { margin-bottom: 10px; }
+    .footer-col a { font-size: 0.82rem; color: rgba(255,255,255,0.5); transition: color 0.2s; }
+    .footer-col a:hover { color: var(--gold-light); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .footer-bottom p { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+    .footer-disclaimer { font-size: 0.68rem; color: rgba(255,255,255,0.22); max-width: 560px; text-align: right; line-height: 1.6; }
+
+    .chat-nudge { position: fixed; bottom: 96px; right: 24px; background: var(--navy); border: 1px solid var(--border); color: var(--white); padding: 12px 18px 12px 14px; font-size: 0.78rem; font-weight: 500; border-radius: 3px; box-shadow: 0 6px 30px rgba(0,0,0,0.4); z-index: 9998; display: flex; align-items: center; gap: 10px; opacity: 0; transform: translateY(10px); transition: opacity 0.5s, transform 0.5s; cursor: pointer; max-width: 240px; }
+    .chat-nudge.show { opacity: 1; transform: translateY(0); }
+    .chat-nudge-dot { width: 8px; height: 8px; border-radius: 50%; background: #3fcf8e; flex-shrink: 0; animation: pulse 2s infinite; }
+    .chat-nudge-close { margin-left: auto; opacity: 0.4; font-size: 0.7rem; cursor: pointer; }
+    .chat-nudge-close:hover { opacity: 1; }
+    @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.4); opacity: 0.7; } }
+
+    @media (max-width: 900px) { .nav-links, .nav-cta { display: none; } .hamburger { display: flex; } .mobile-menu { display: flex; } .why-inner { grid-template-columns: 1fr; gap: 48px; } .why-image { display: none; } .testimonials-grid { grid-template-columns: 1fr; } .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; } }
+    @media (max-width: 640px) { .hero-stats { flex-direction: column; gap: 24px; } .intro-inner { flex-direction: column; gap: 28px; } .contact-bar-inner { flex-direction: column; align-items: flex-start; } .footer-top { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; align-items: flex-start; } .footer-disclaimer { text-align: left; } }
+
+    /* VICTORIA CHATBOT */
+    #vic-widget { position: fixed; bottom: 24px; right: 24px; z-index: 9997; font-family: 'Montserrat', sans-serif; }
+    #vic-launcher { width: 58px; height: 58px; background: var(--gold); border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(184,154,78,0.45); transition: transform 0.3s, box-shadow 0.3s; position: relative; }
+    #vic-launcher:hover { transform: scale(1.08); box-shadow: 0 8px 32px rgba(184,154,78,0.55); }
+    #vic-launcher .ic-chat { transition: opacity 0.2s; }
+    #vic-launcher .ic-close { position: absolute; opacity: 0; transition: opacity 0.2s; }
+    #vic-widget.open #vic-launcher .ic-chat { opacity: 0; }
+    #vic-widget.open #vic-launcher .ic-close { opacity: 1; }
+    #vic-badge { position: absolute; top: -3px; right: -3px; width: 17px; height: 17px; background: #e53e3e; border-radius: 50%; font-size: 10px; font-weight: 700; color: #fff; display: flex; align-items: center; justify-content: center; animation: badgePop 0.3s ease; }
+    #vic-widget.open #vic-badge { display: none; }
+    @keyframes badgePop { from { transform: scale(0); } to { transform: scale(1); } }
+    #vic-box { position: absolute; bottom: 72px; right: 0; width: 375px; background: #ffffff; border: 1px solid rgba(184,154,78,0.25); border-radius: 3px; box-shadow: 0 20px 60px rgba(0,0,0,0.18); display: none; flex-direction: column; max-height: 580px; animation: slideUp 0.3s ease; overflow: hidden; }
+    #vic-widget.open #vic-box { display: flex; }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    #vic-head { background: linear-gradient(135deg, #0b1b38 0%, #1a3363 100%); padding: 14px 18px; display: flex; align-items: center; gap: 12px; flex-shrink: 0; border-bottom: 2px solid var(--gold); }
+    .vic-avatar { width: 40px; height: 40px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 700; color: #0b1b38; flex-shrink: 0; }
+    .vic-head-name { font-size: 13px; font-weight: 600; color: #ffffff; letter-spacing: 0.05em; display: block; }
+    .vic-head-status { font-size: 10px; color: var(--gold-light); letter-spacing: 0.08em; display: flex; align-items: center; gap: 5px; margin-top: 2px; }
+    .vic-head-status::before { content: ''; width: 6px; height: 6px; background: #3fcf8e; border-radius: 50%; animation: pulse 2s infinite; }
+    .vic-disclaimer { font-size: 9px; color: rgba(255,255,255,0.4); letter-spacing: 0.06em; margin-top: 2px; display: block; }
+    #vic-msgs { flex: 1; overflow-y: auto; padding: 18px 16px; display: flex; flex-direction: column; gap: 11px; background: #f7f5f0; scrollbar-width: thin; scrollbar-color: rgba(184,154,78,0.25) transparent; }
+    #vic-msgs::-webkit-scrollbar { width: 3px; }
+    #vic-msgs::-webkit-scrollbar-thumb { background: rgba(184,154,78,0.3); border-radius: 2px; }
+    .vic-bubble { max-width: 87%; padding: 11px 14px; font-size: 12.5px; line-height: 1.65; border-radius: 2px; animation: popIn 0.22s ease; }
+    @keyframes popIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    .vic-bubble.agent { background: #ffffff; color: #1a2a4a; align-self: flex-start; border-left: 2px solid var(--gold); box-shadow: 0 1px 4px rgba(0,0,0,0.07); }
+    .vic-bubble.user { background: #0b1b38; color: #ffffff; align-self: flex-end; font-weight: 500; }
+    .vic-btns { display: flex; flex-wrap: wrap; gap: 7px; align-self: flex-start; animation: popIn 0.22s ease; max-width: 100%; }
+    .vic-btn { background: #ffffff; border: 1px solid rgba(184,154,78,0.5); color: #0b1b38; padding: 7px 13px; font-size: 11px; font-weight: 600; letter-spacing: 0.05em; cursor: pointer; font-family: 'Montserrat', sans-serif; border-radius: 2px; transition: all 0.2s; }
+    .vic-btn:hover { background: var(--gold); border-color: var(--gold); color: #0b1b38; }
+    .vic-typing { display: flex; gap: 5px; align-items: center; padding: 11px 14px; align-self: flex-start; background: #ffffff; border-left: 2px solid var(--gold); border-radius: 2px; box-shadow: 0 1px 4px rgba(0,0,0,0.07); animation: popIn 0.22s ease; }
+    .vic-typing span { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; animation: typeDot 1.2s infinite; }
+    .vic-typing span:nth-child(2) { animation-delay: 0.2s; }
+    .vic-typing span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typeDot { 0%,60%,100% { opacity: 0.3; transform: scale(0.8); } 30% { opacity: 1; transform: scale(1.1); } }
+    #vic-foot { padding: 11px 13px; border-top: 1px solid rgba(184,154,78,0.15); display: flex; gap: 8px; align-items: center; background: #ffffff; flex-shrink: 0; }
+    #vic-input { flex: 1; background: #f7f5f0; border: 1px solid rgba(11,27,56,0.12); border-radius: 2px; padding: 9px 12px; font-size: 12px; color: #0b1b38; font-family: 'Montserrat', sans-serif; outline: none; transition: border-color 0.2s; }
+    #vic-input:focus { border-color: var(--gold); }
+    #vic-input::placeholder { color: #aab; }
+    #vic-send { width: 37px; height: 37px; background: #0b1b38; border: none; border-radius: 2px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.2s; }
+    #vic-send:hover { background: #1a3363; }
+    .vic-powered { text-align: center; font-size: 9px; color: #bbb; letter-spacing: 0.1em; padding: 6px 0 8px; text-transform: uppercase; background: #ffffff; flex-shrink: 0; }
   </style>
 </head>
-
 <body>
 
-  <!-- ANNOUNCEMENT BAR -->
   <div class="announcement-bar">
-    <span>Free Consultations Available</span> — Call (555) 400-7200 or speak with Victoria, our AI legal assistant, available 24/7
+    <span>Free Consultations Available</span> &mdash; Call (555) 400-7200 or speak with Victoria, our AI legal assistant, available 24/7
   </div>
 
-  <!-- NAVIGATION -->
   <nav id="navbar">
     <div class="nav-inner">
       <a href="#" class="nav-logo">
         <div class="nav-logo-mark">
-          <!-- scales of justice icon -->
-          <svg viewBox="0 0 24 24" fill="none" stroke="#b89a4e" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 3v18M3 21h18M6 7l-3 6h6L6 7zM18 7l-3 6h6l-3-6z"/>
-            <line x1="3" y1="21" x2="6" y2="13"/>
-            <line x1="21" y1="21" x2="18" y2="13"/>
-            <line x1="6" y1="21" x2="18" y2="21"/>
-          </svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#b89a4e" stroke-width="1.5"><path d="M12 3v18M3 21h18M6 7l-3 6h6L6 7zM18 7l-3 6h6l-3-6z"/><line x1="3" y1="21" x2="6" y2="13"/><line x1="21" y1="21" x2="18" y2="13"/><line x1="6" y1="21" x2="18" y2="21"/></svg>
         </div>
         <div class="nav-logo-text">
           <strong>Sterling Law Group</strong>
           <span>Attorneys at Law</span>
         </div>
       </a>
-
       <ul class="nav-links">
         <li><a href="#practice">Practice Areas</a></li>
         <li><a href="#why">Our Firm</a></li>
         <li><a href="#testimonials">Results</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-
       <a href="#cta" class="btn-primary nav-cta">Free Consultation</a>
-
-      <div class="hamburger" id="hamburger" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </div>
+      <div class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></div>
     </div>
     <nav class="mobile-menu" id="mobileMenu">
       <a href="#practice" onclick="closeMobile()">Practice Areas</a>
-      <a href="#why"      onclick="closeMobile()">Our Firm</a>
+      <a href="#why" onclick="closeMobile()">Our Firm</a>
       <a href="#testimonials" onclick="closeMobile()">Results</a>
-      <a href="#contact"  onclick="closeMobile()">Contact</a>
-      <a href="#cta"      onclick="closeMobile()" style="color:var(--gold)">Free Consultation</a>
+      <a href="#contact" onclick="closeMobile()">Contact</a>
+      <a href="#cta" onclick="closeMobile()" style="color:var(--gold)">Free Consultation</a>
     </nav>
   </nav>
 
-  <!-- HERO -->
   <section class="hero" id="home">
     <div class="hero-bg"></div>
     <div class="hero-overlay"></div>
     <div class="hero-lines"></div>
-
     <div class="hero-content container">
       <div class="hero-eyebrow">
         <div class="hero-eyebrow-line"></div>
         <span>Established 1998 &nbsp;|&nbsp; Over 25 Years of Legal Excellence</span>
       </div>
-
-      <h1>
-        We Fight for<br>
-        <em>Justice.</em> We Protect<br>
-        Your Rights.
-      </h1>
-
-      <p class="hero-desc">
-        Sterling Law Group brings decades of courtroom experience, strategic legal counsel, and an unwavering commitment to our clients. When the stakes are highest, you need attorneys who will not rest until justice is served.
-      </p>
-
+      <h1>We Fight for<br><em>Justice.</em> We Protect<br>Your Rights.</h1>
+      <p class="hero-desc">Sterling Law Group brings decades of courtroom experience, strategic legal counsel, and an unwavering commitment to our clients. When the stakes are highest, you need attorneys who will not rest until justice is served.</p>
       <div class="hero-actions">
         <a href="#cta" class="btn-primary">Schedule a Free Consultation</a>
         <a href="#practice" class="btn-outline">Our Practice Areas</a>
       </div>
-
       <div class="hero-stats">
-        <div>
-          <span class="hero-stat-num">97%</span>
-          <span class="hero-stat-label">Case Success Rate</span>
-        </div>
-        <div>
-          <span class="hero-stat-num">4,800+</span>
-          <span class="hero-stat-label">Clients Represented</span>
-        </div>
-        <div>
-          <span class="hero-stat-num">$380M+</span>
-          <span class="hero-stat-label">Recovered for Clients</span>
-        </div>
+        <div><span class="hero-stat-num">97%</span><span class="hero-stat-label">Case Success Rate</span></div>
+        <div><span class="hero-stat-num">4,800+</span><span class="hero-stat-label">Clients Represented</span></div>
+        <div><span class="hero-stat-num">$380M+</span><span class="hero-stat-label">Recovered for Clients</span></div>
       </div>
     </div>
-
     <div class="hero-ticker">
       <div class="ticker-track">
-        <span>Personal Injury</span>
-        <span>Family Law</span>
-        <span>Criminal Defense</span>
-        <span>Business Law</span>
-        <span>Real Estate Law</span>
-        <span>Immigration Law</span>
-        <span>Estate Planning</span>
-        <span>Free Consultations</span>
-        <span>Confidential Advice</span>
-        <span>Personal Injury</span>
-        <span>Family Law</span>
-        <span>Criminal Defense</span>
-        <span>Business Law</span>
-        <span>Real Estate Law</span>
-        <span>Immigration Law</span>
-        <span>Estate Planning</span>
-        <span>Free Consultations</span>
-        <span>Confidential Advice</span>
+        <span>Personal Injury</span><span>Family Law</span><span>Criminal Defense</span><span>Business Law</span><span>Real Estate Law</span><span>Immigration Law</span><span>Estate Planning</span><span>Free Consultations</span><span>Confidential Advice</span>
+        <span>Personal Injury</span><span>Family Law</span><span>Criminal Defense</span><span>Business Law</span><span>Real Estate Law</span><span>Immigration Law</span><span>Estate Planning</span><span>Free Consultations</span><span>Confidential Advice</span>
       </div>
     </div>
   </section>
 
-  <!-- INTRO STRIP -->
   <section class="intro">
     <div class="container">
       <div class="intro-inner reveal">
-        <div class="intro-badge">
-          <strong>25+</strong>
-          <span>Years of<br>Service</span>
-        </div>
+        <div class="intro-badge"><strong>25+</strong><span>Years of<br>Service</span></div>
         <div class="intro-text">
           <h2>A Firm Built on <em style="font-style:italic;color:var(--gold)">Principle</em> and <em style="font-style:italic;color:var(--gold)">Results</em></h2>
-          <p>
-            Since 1998, Sterling Law Group has stood as one of the region's most trusted legal practices. Our attorneys combine deep legal expertise with genuine dedication to every client's outcome. We do not take cases we cannot win, and we do not rest until our clients receive the justice they deserve. All consultations are strictly confidential, and we work on contingency for personal injury matters — you pay nothing unless we win.
-          </p>
+          <p>Since 1998, Sterling Law Group has stood as one of the region's most trusted legal practices. Our attorneys combine deep legal expertise with genuine dedication to every client's outcome. We do not take cases we cannot win, and we do not rest until our clients receive the justice they deserve. All consultations are strictly confidential, and we work on contingency for personal injury matters — you pay nothing unless we win.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PRACTICE AREAS -->
   <section class="practice" id="practice">
     <div class="container">
       <div class="practice-header reveal">
@@ -1159,48 +307,18 @@
         <div class="divider-gold center"></div>
         <h2>Our <em class="gold-italic">Practice Areas</em></h2>
       </div>
-
       <div class="practice-grid">
-        <div class="practice-card reveal">
-          <span class="pc-num">01</span>
-          <h3>Personal Injury</h3>
-          <p>We represent accident victims in claims involving car crashes, slip-and-fall incidents, workplace injuries, and medical malpractice. Our contingency-fee model means you pay nothing unless we recover compensation on your behalf.</p>
-        </div>
-        <div class="practice-card reveal">
-          <span class="pc-num">02</span>
-          <h3>Family Law</h3>
-          <p>From divorce and child custody arrangements to adoption and spousal support, our family law attorneys handle sensitive matters with the discretion, empathy, and legal precision your family deserves.</p>
-        </div>
-        <div class="practice-card reveal">
-          <span class="pc-num">03</span>
-          <h3>Criminal Defense</h3>
-          <p>Facing criminal charges requires experienced, aggressive defense counsel. We protect your constitutional rights at every stage — from arraignment through trial — and work tirelessly to achieve the best possible outcome.</p>
-        </div>
-        <div class="practice-card reveal">
-          <span class="pc-num">04</span>
-          <h3>Business Law</h3>
-          <p>We advise corporations, partnerships, and startups on entity formation, contract drafting, commercial disputes, mergers, and compliance matters. Sound legal counsel is the foundation of every successful business.</p>
-        </div>
-        <div class="practice-card reveal">
-          <span class="pc-num">05</span>
-          <h3>Real Estate Law</h3>
-          <p>Our real estate attorneys handle residential and commercial transactions, title disputes, landlord-tenant conflicts, and property development matters with meticulous attention to protecting your investment.</p>
-        </div>
-        <div class="practice-card reveal">
-          <span class="pc-num">06</span>
-          <h3>Immigration Law</h3>
-          <p>We guide individuals and families through visa applications, green card petitions, naturalization proceedings, and deportation defense — providing clear guidance through a complex and often intimidating process.</p>
-        </div>
-        <div class="practice-card reveal">
-          <span class="pc-num">07</span>
-          <h3>Estate Planning</h3>
-          <p>Protect your legacy and your loved ones with comprehensive wills, trusts, powers of attorney, and probate administration. We craft estate plans that reflect your precise wishes and minimize unnecessary tax liability.</p>
-        </div>
+        <div class="practice-card reveal"><span class="pc-num">01</span><h3>Personal Injury</h3><p>We represent accident victims in claims involving car crashes, slip-and-fall incidents, workplace injuries, and medical malpractice. Our contingency-fee model means you pay nothing unless we recover compensation on your behalf.</p></div>
+        <div class="practice-card reveal"><span class="pc-num">02</span><h3>Family Law</h3><p>From divorce and child custody arrangements to adoption and spousal support, our family law attorneys handle sensitive matters with the discretion, empathy, and legal precision your family deserves.</p></div>
+        <div class="practice-card reveal"><span class="pc-num">03</span><h3>Criminal Defense</h3><p>Facing criminal charges requires experienced, aggressive defense counsel. We protect your constitutional rights at every stage — from arraignment through trial — and work tirelessly to achieve the best possible outcome.</p></div>
+        <div class="practice-card reveal"><span class="pc-num">04</span><h3>Business Law</h3><p>We advise corporations, partnerships, and startups on entity formation, contract drafting, commercial disputes, mergers, and compliance matters. Sound legal counsel is the foundation of every successful business.</p></div>
+        <div class="practice-card reveal"><span class="pc-num">05</span><h3>Real Estate Law</h3><p>Our real estate attorneys handle residential and commercial transactions, title disputes, landlord-tenant conflicts, and property development matters with meticulous attention to protecting your investment.</p></div>
+        <div class="practice-card reveal"><span class="pc-num">06</span><h3>Immigration Law</h3><p>We guide individuals and families through visa applications, green card petitions, naturalization proceedings, and deportation defense — providing clear guidance through a complex and often intimidating process.</p></div>
+        <div class="practice-card reveal"><span class="pc-num">07</span><h3>Estate Planning</h3><p>Protect your legacy and your loved ones with comprehensive wills, trusts, powers of attorney, and probate administration. We craft estate plans that reflect your precise wishes and minimize unnecessary tax liability.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- WHY CHOOSE US -->
   <section class="why" id="why">
     <div class="container">
       <div class="why-inner">
@@ -1208,63 +326,23 @@
           <span class="section-label">Why Sterling Law Group</span>
           <div class="divider-gold"></div>
           <h2>The Difference<br>Experience<br><em class="gold-italic">Makes</em></h2>
-          <p>
-            In a crowded legal market, Sterling Law Group has built its reputation on a single foundation: delivering measurable results for real people. We combine senior-level legal expertise with a client-first culture that keeps you informed and empowered throughout every stage of your case.
-          </p>
-
+          <p>In a crowded legal market, Sterling Law Group has built its reputation on a single foundation: delivering measurable results for real people. We combine senior-level legal expertise with a client-first culture that keeps you informed and empowered throughout every stage of your case.</p>
           <div class="why-items">
-            <div class="why-item">
-              <div class="why-icon">
-                <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              </div>
-              <div>
-                <h4>Seasoned Trial Attorneys</h4>
-                <p>Our team includes former prosecutors, federal litigators, and specialist counsel with decades of courtroom experience across all seven practice areas.</p>
-              </div>
-            </div>
-            <div class="why-item">
-              <div class="why-icon">
-                <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-              </div>
-              <div>
-                <h4>Proven, Documented Results</h4>
-                <p>Over $380 million recovered for clients across personal injury, business litigation, and family law matters. Our track record speaks for itself.</p>
-              </div>
-            </div>
-            <div class="why-item">
-              <div class="why-icon">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              </div>
-              <div>
-                <h4>Free Consultations — No Obligation</h4>
-                <p>Every new client receives a complimentary, fully confidential consultation with a licensed attorney. No pressure, no commitment, no cost to you.</p>
-              </div>
-            </div>
-            <div class="why-item">
-              <div class="why-icon">
-                <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              </div>
-              <div>
-                <h4>Absolute Client Confidentiality</h4>
-                <p>Attorney-client privilege is sacred at Sterling Law Group. Every conversation, document, and case detail is handled with complete discretion and legal protection.</p>
-              </div>
-            </div>
+            <div class="why-item"><div class="why-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><h4>Seasoned Trial Attorneys</h4><p>Our team includes former prosecutors, federal litigators, and specialist counsel with decades of courtroom experience across all seven practice areas.</p></div></div>
+            <div class="why-item"><div class="why-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><h4>Proven, Documented Results</h4><p>Over $380 million recovered for clients across personal injury, business litigation, and family law matters. Our track record speaks for itself.</p></div></div>
+            <div class="why-item"><div class="why-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><h4>Free Consultations — No Obligation</h4><p>Every new client receives a complimentary, fully confidential consultation with a licensed attorney. No pressure, no commitment, no cost to you.</p></div></div>
+            <div class="why-item"><div class="why-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><div><h4>Absolute Client Confidentiality</h4><p>Attorney-client privilege is sacred at Sterling Law Group. Every conversation, document, and case detail is handled with complete discretion and legal protection.</p></div></div>
           </div>
         </div>
-
         <div class="why-image reveal">
           <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=80&fit=crop" alt="Sterling Law Group attorneys" />
-          <div class="why-image-overlay">
-            <span class="why-image-stat">4,800+</span>
-            <span class="why-image-stat-label">Clients Successfully Represented</span>
-          </div>
+          <div class="why-image-overlay"><span class="why-image-stat">4,800+</span><span class="why-image-stat-label">Clients Successfully Represented</span></div>
           <div class="why-image-border"></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
   <section class="testimonials" id="testimonials">
     <div class="container">
       <div class="testimonials-header reveal">
@@ -1272,57 +350,14 @@
         <div class="divider-gold center"></div>
         <h2>What Our <em class="gold-italic">Clients</em> Say</h2>
       </div>
-
       <div class="testimonials-grid">
-        <div class="tcard reveal">
-          <div class="tcard-stars">
-            <span></span><span></span><span></span><span></span><span></span>
-          </div>
-          <span class="tcard-quote">"</span>
-          <p>After my accident, I did not know where to turn. Sterling Law Group took my call on a Saturday evening, explained everything clearly, and had a case filed within 48 hours. They recovered more than three times what the insurance company initially offered. I cannot recommend them highly enough.</p>
-          <div class="tcard-author">
-            <div class="tcard-initials">MH</div>
-            <div>
-              <span class="tcard-name">Marcus Holloway</span>
-              <span class="tcard-role">Personal Injury Client</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="tcard reveal">
-          <div class="tcard-stars">
-            <span></span><span></span><span></span><span></span><span></span>
-          </div>
-          <span class="tcard-quote">"</span>
-          <p>Going through a custody dispute was the most difficult experience of my life. My attorney at Sterling Law Group was not only extraordinarily skilled in the courtroom — she was genuinely compassionate throughout the entire process. My children are now exactly where they should be.</p>
-          <div class="tcard-author">
-            <div class="tcard-initials">DW</div>
-            <div>
-              <span class="tcard-name">Diane Weston</span>
-              <span class="tcard-role">Family Law Client</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="tcard reveal">
-          <div class="tcard-stars">
-            <span></span><span></span><span></span><span></span><span></span>
-          </div>
-          <span class="tcard-quote">"</span>
-          <p>We retained Sterling Law Group for a complex commercial contract dispute involving three parties across two states. Their business litigation team was exceptionally organized, strategically brilliant, and ultimately secured a settlement that exceeded our best-case projections by a significant margin.</p>
-          <div class="tcard-author">
-            <div class="tcard-initials">RP</div>
-            <div>
-              <span class="tcard-name">Robert Pacheco</span>
-              <span class="tcard-role">Business Law Client</span>
-            </div>
-          </div>
-        </div>
+        <div class="tcard reveal"><div class="tcard-stars"><span></span><span></span><span></span><span></span><span></span></div><span class="tcard-quote">"</span><p>After my accident, I did not know where to turn. Sterling Law Group took my call on a Saturday evening, explained everything clearly, and had a case filed within 48 hours. They recovered more than three times what the insurance company initially offered.</p><div class="tcard-author"><div class="tcard-initials">MH</div><div><span class="tcard-name">Marcus Holloway</span><span class="tcard-role">Personal Injury Client</span></div></div></div>
+        <div class="tcard reveal"><div class="tcard-stars"><span></span><span></span><span></span><span></span><span></span></div><span class="tcard-quote">"</span><p>Going through a custody dispute was the most difficult experience of my life. My attorney at Sterling Law Group was not only extraordinarily skilled in the courtroom — she was genuinely compassionate throughout the entire process.</p><div class="tcard-author"><div class="tcard-initials">DW</div><div><span class="tcard-name">Diane Weston</span><span class="tcard-role">Family Law Client</span></div></div></div>
+        <div class="tcard reveal"><div class="tcard-stars"><span></span><span></span><span></span><span></span><span></span></div><span class="tcard-quote">"</span><p>We retained Sterling Law Group for a complex commercial contract dispute involving three parties across two states. Their business litigation team was exceptionally organized, strategically brilliant, and ultimately secured a settlement that exceeded our best-case projections.</p><div class="tcard-author"><div class="tcard-initials">RP</div><div><span class="tcard-name">Robert Pacheco</span><span class="tcard-role">Business Law Client</span></div></div></div>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
   <section class="cta" id="cta">
     <div class="container">
       <div class="cta-content reveal">
@@ -1337,449 +372,145 @@
     </div>
   </section>
 
-  <!-- CONTACT BAR -->
   <div class="contact-bar" id="contact">
     <div class="container">
       <div class="contact-bar-inner">
         <div class="contact-info">
-          <div class="contact-item">
-            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.91 6.91l.61-.61a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <span>(555) 400-7200</span>
-          </div>
-          <div class="contact-item">
-            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <span>consult@sterlinglawgroup.com</span>
-          </div>
-          <div class="contact-item">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span>Mon – Fri: 8:00 AM – 6:00 PM</span>
-          </div>
-          <div class="contact-item">
-            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <span>300 Sterling Plaza, Suite 1800</span>
-          </div>
+          <div class="contact-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.91 6.91l.61-.61a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>(555) 400-7200</span></div>
+          <div class="contact-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>consult@sterlinglawgroup.com</span></div>
+          <div class="contact-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Mon to Fri: 8:00 AM to 6:00 PM</span></div>
+          <div class="contact-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>300 Sterling Plaza, Suite 1800</span></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- FOOTER -->
   <footer>
     <div class="container">
       <div class="footer-top">
-        <div class="footer-brand">
-          <strong>Sterling Law Group</strong>
-          <div class="tagline">Attorneys at Law</div>
-          <p>Dedicated legal representation across seven practice areas. Serving clients with integrity, expertise, and an uncompromising commitment to results since 1998.</p>
-        </div>
-        <div class="footer-col">
-          <h4>Practice Areas</h4>
-          <ul>
-            <li><a href="#practice">Personal Injury</a></li>
-            <li><a href="#practice">Family Law</a></li>
-            <li><a href="#practice">Criminal Defense</a></li>
-            <li><a href="#practice">Business Law</a></li>
-            <li><a href="#practice">Real Estate Law</a></li>
-            <li><a href="#practice">Immigration Law</a></li>
-            <li><a href="#practice">Estate Planning</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Our Firm</h4>
-          <ul>
-            <li><a href="#why">About Us</a></li>
-            <li><a href="#why">Our Attorneys</a></li>
-            <li><a href="#testimonials">Case Results</a></li>
-            <li><a href="#testimonials">Client Reviews</a></li>
-            <li><a href="#cta">Free Consultation</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Contact</h4>
-          <ul>
-            <li><a href="tel:5554007200">(555) 400-7200</a></li>
-            <li><a href="mailto:consult@sterlinglawgroup.com">consult@sterlinglawgroup.com</a></li>
-            <li><a href="#contact">300 Sterling Plaza, Suite 1800</a></li>
-            <li><a href="#contact">Mon – Fri: 8AM – 6PM</a></li>
-            <li><a href="#contact">Emergency: 24/7 Line</a></li>
-          </ul>
-        </div>
+        <div class="footer-brand"><strong>Sterling Law Group</strong><div class="tagline">Attorneys at Law</div><p>Dedicated legal representation across seven practice areas. Serving clients with integrity, expertise, and an uncompromising commitment to results since 1998.</p></div>
+        <div class="footer-col"><h4>Practice Areas</h4><ul><li><a href="#practice">Personal Injury</a></li><li><a href="#practice">Family Law</a></li><li><a href="#practice">Criminal Defense</a></li><li><a href="#practice">Business Law</a></li><li><a href="#practice">Real Estate Law</a></li><li><a href="#practice">Immigration Law</a></li><li><a href="#practice">Estate Planning</a></li></ul></div>
+        <div class="footer-col"><h4>Our Firm</h4><ul><li><a href="#why">About Us</a></li><li><a href="#why">Our Attorneys</a></li><li><a href="#testimonials">Case Results</a></li><li><a href="#testimonials">Client Reviews</a></li><li><a href="#cta">Free Consultation</a></li></ul></div>
+        <div class="footer-col"><h4>Contact</h4><ul><li><a href="tel:5554007200">(555) 400-7200</a></li><li><a href="mailto:consult@sterlinglawgroup.com">consult@sterlinglawgroup.com</a></li><li><a href="#contact">300 Sterling Plaza, Suite 1800</a></li><li><a href="#contact">Mon to Fri: 8AM to 6PM</a></li><li><a href="#contact">Emergency: 24/7 Line</a></li></ul></div>
       </div>
-
       <div class="footer-bottom">
-        <p>© 2026 Sterling Law Group. All rights reserved.</p>
-        <p class="footer-disclaimer">
-          This website is for informational purposes only and does not constitute legal advice. Viewing this site does not establish an attorney-client relationship. Results may vary based on individual circumstances.
-        </p>
+        <p>2026 Sterling Law Group. All rights reserved.</p>
+        <p class="footer-disclaimer">This website is for informational purposes only and does not constitute legal advice. Viewing this site does not establish an attorney-client relationship. Results may vary based on individual circumstances.</p>
       </div>
     </div>
   </footer>
 
-  <!-- CHAT NUDGE -->
   <div class="chat-nudge" id="chatNudge">
     <div class="chat-nudge-dot"></div>
-    <span>Speak with <strong style="color:var(--gold)">Victoria</strong> — our legal AI assistant</span>
+    <span>Speak with <strong style="color:var(--gold)">Victoria</strong> &mdash; our legal AI assistant</span>
     <span class="chat-nudge-close" id="nudgeClose">&#10005;</span>
   </div>
 
- <!-- ══════════════════════════════════════
-  
-
-<!-- VICTORIA — BUILT-IN LEGAL AI ASSISTANT -->
-<style>
-  #vic-widget {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    z-index: 9997;
-    font-family: 'Montserrat', sans-serif;
-  }
-
-  /* Launcher */
-  #vic-launcher {
-    width: 58px;
-    height: 58px;
-    background: var(--gold);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 20px rgba(184,154,78,0.45);
-    transition: transform 0.3s, box-shadow 0.3s;
-    position: relative;
-  }
-  #vic-launcher:hover {
-    transform: scale(1.08);
-    box-shadow: 0 8px 32px rgba(184,154,78,0.55);
-  }
-  #vic-launcher .ic-chat { transition: opacity 0.2s; }
-  #vic-launcher .ic-close { position: absolute; opacity: 0; transition: opacity 0.2s; }
-  #vic-widget.open #vic-launcher .ic-chat  { opacity: 0; }
-  #vic-widget.open #vic-launcher .ic-close { opacity: 1; }
-
-  #vic-badge {
-    position: absolute;
-    top: -3px; right: -3px;
-    width: 17px; height: 17px;
-    background: #e53e3e;
-    border-radius: 50%;
-    font-size: 10px;
-    font-weight: 700;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: badgePop 0.3s ease;
-  }
-  #vic-widget.open #vic-badge { display: none; }
-  @keyframes badgePop { from { transform: scale(0); } to { transform: scale(1); } }
-
-  /* Chat box */
-  #vic-box {
-    position: absolute;
-    bottom: 72px;
-    right: 0;
-    width: 375px;
-    background: #ffffff;
-    border: 1px solid rgba(184,154,78,0.25);
-    border-radius: 3px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.18);
-    display: none;
-    flex-direction: column;
-    max-height: 580px;
-    animation: slideUp 0.3s ease;
-    overflow: hidden;
-  }
-  #vic-widget.open #vic-box { display: flex; }
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(14px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Header */
-  #vic-head {
-    background: linear-gradient(135deg, #0b1b38 0%, #1a3363 100%);
-    padding: 14px 18px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-shrink: 0;
-    border-bottom: 2px solid var(--gold);
-  }
-  .vic-avatar {
-    width: 40px; height: 40px;
-    background: var(--gold);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: #0b1b38;
-    flex-shrink: 0;
-  }
-  .vic-head-name {
-    font-size: 13px;
-    font-weight: 600;
-    color: #ffffff;
-    letter-spacing: 0.05em;
-    display: block;
-  }
-  .vic-head-status {
-    font-size: 10px;
-    color: var(--gold-light);
-    letter-spacing: 0.08em;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-top: 2px;
-  }
-  .vic-head-status::before {
-    content: '';
-    width: 6px; height: 6px;
-    background: #3fcf8e;
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-  .vic-disclaimer {
-    font-size: 9px;
-    color: rgba(255,255,255,0.4);
-    letter-spacing: 0.06em;
-    margin-top: 2px;
-    display: block;
-  }
-
-  /* Messages */
-  #vic-msgs {
-    flex: 1;
-    overflow-y: auto;
-    padding: 18px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 11px;
-    background: #f7f5f0;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(184,154,78,0.25) transparent;
-  }
-  #vic-msgs::-webkit-scrollbar { width: 3px; }
-  #vic-msgs::-webkit-scrollbar-thumb { background: rgba(184,154,78,0.3); border-radius: 2px; }
-
-  .vic-bubble {
-    max-width: 87%;
-    padding: 11px 14px;
-    font-size: 12.5px;
-    line-height: 1.65;
-    border-radius: 2px;
-    animation: popIn 0.22s ease;
-  }
-  @keyframes popIn {
-    from { opacity: 0; transform: translateY(5px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .vic-bubble.agent {
-    background: #ffffff;
-    color: #1a2a4a;
-    align-self: flex-start;
-    border-left: 2px solid var(--gold);
-    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
-  }
-  .vic-bubble.user {
-    background: #0b1b38;
-    color: #ffffff;
-    align-self: flex-end;
-    font-weight: 500;
-  }
-
-  /* Buttons */
-  .vic-btns {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-    align-self: flex-start;
-    animation: popIn 0.22s ease;
-    max-width: 100%;
-  }
-  .vic-btn {
-    background: #ffffff;
-    border: 1px solid rgba(184,154,78,0.5);
-    color: #0b1b38;
-    padding: 7px 13px;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    cursor: pointer;
-    font-family: 'Montserrat', sans-serif;
-    border-radius: 2px;
-    transition: all 0.2s;
-  }
-  .vic-btn:hover {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: #0b1b38;
-  }
-
-  /* Typing */
-  .vic-typing {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    padding: 11px 14px;
-    align-self: flex-start;
-    background: #ffffff;
-    border-left: 2px solid var(--gold);
-    border-radius: 2px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
-    animation: popIn 0.22s ease;
-  }
-  .vic-typing span {
-    width: 6px; height: 6px;
-    background: var(--gold);
-    border-radius: 50%;
-    animation: typeDot 1.2s infinite;
-  }
-  .vic-typing span:nth-child(2) { animation-delay: 0.2s; }
-  .vic-typing span:nth-child(3) { animation-delay: 0.4s; }
-  @keyframes typeDot {
-    0%,60%,100% { opacity: 0.3; transform: scale(0.8); }
-    30% { opacity: 1; transform: scale(1.1); }
-  }
-
-  /* Input */
-  #vic-foot {
-    padding: 11px 13px;
-    border-top: 1px solid rgba(184,154,78,0.15);
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    background: #ffffff;
-    flex-shrink: 0;
-  }
-  #vic-input {
-    flex: 1;
-    background: #f7f5f0;
-    border: 1px solid rgba(11,27,56,0.12);
-    border-radius: 2px;
-    padding: 9px 12px;
-    font-size: 12px;
-    color: #0b1b38;
-    font-family: 'Montserrat', sans-serif;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  #vic-input:focus { border-color: var(--gold); }
-  #vic-input::placeholder { color: #aab; }
-  #vic-send {
-    width: 37px; height: 37px;
-    background: #0b1b38;
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: background 0.2s;
-  }
-  #vic-send:hover { background: #1a3363; }
-
-  .vic-powered {
-    text-align: center;
-    font-size: 9px;
-    color: #bbb;
-    letter-spacing: 0.1em;
-    padding: 6px 0 8px;
-    text-transform: uppercase;
-    background: #ffffff;
-    flex-shrink: 0;
-  }
-</style>
-
-<div id="vic-widget">
-  <div id="vic-box">
-    <div id="vic-head">
-      <div class="vic-avatar">V</div>
-      <div style="flex:1">
-        <span class="vic-head-name">Victoria &nbsp;·&nbsp; Sterling Law Group</span>
-        <span class="vic-head-status">Available 24 hours a day</span>
-        <span class="vic-disclaimer">General information only. Not legal advice.</span>
+  <div id="vic-widget">
+    <div id="vic-box">
+      <div id="vic-head">
+        <div class="vic-avatar">V</div>
+        <div style="flex:1">
+          <span class="vic-head-name">Victoria &nbsp;&middot;&nbsp; Sterling Law Group</span>
+          <span class="vic-head-status">Available 24 hours a day</span>
+          <span class="vic-disclaimer">General information only. Not legal advice.</span>
+        </div>
       </div>
+      <div id="vic-msgs"></div>
+      <div id="vic-foot">
+        <input id="vic-input" type="text" placeholder="Type anything — I understand you..." autocomplete="off" />
+        <button id="vic-send" aria-label="Send">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M13 1L1 7l5 1.5L7.5 13 13 1z" fill="#b89a4e"/></svg>
+        </button>
+      </div>
+      <div class="vic-powered">Sterling Law Group &nbsp;&middot;&nbsp; Confidential &amp; Secure</div>
     </div>
-    <div id="vic-msgs"></div>
-    <div id="vic-foot">
-      <input id="vic-input" type="text" placeholder="Type your question…" autocomplete="off" />
-      <button id="vic-send" aria-label="Send">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <path d="M13 1L1 7l5 1.5L7.5 13 13 1z" fill="#b89a4e"/>
-        </svg>
-      </button>
-    </div>
-    <div class="vic-powered">Sterling Law Group &nbsp;·&nbsp; Confidential &amp; Secure</div>
+    <button id="vic-launcher" aria-label="Speak with Victoria">
+      <svg class="ic-chat" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0b1b38" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      <svg class="ic-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0b1b38" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div id="vic-badge">1</div>
   </div>
-
-  <button id="vic-launcher" aria-label="Speak with Victoria">
-    <svg class="ic-chat" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0b1b38" stroke-width="2" stroke-linecap="round">
-      <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
-    </svg>
-    <svg class="ic-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0b1b38" stroke-width="2.5" stroke-linecap="round">
-      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-    </svg>
-  </button>
-  <div id="vic-badge">1</div>
-</div>
 
 <script>
 (function(){
 
-  /* ── PRACTICE AREA DATA ── */
-  const AREAS = [
-    { name:"Personal Injury", fee:"contingency — you pay nothing unless we win", consult:"Free" },
-    { name:"Family Law",       fee:"hourly from $250/hr",                         consult:"$200 for 60 min" },
-    { name:"Criminal Defense", fee:"varies by case complexity",                   consult:"Free" },
-    { name:"Business Law",     fee:"hourly or retainer arrangements available",   consult:"$250 for 60 min" },
-    { name:"Real Estate Law",  fee:"fixed fee for standard transactions",         consult:"$150 for 45 min" },
-    { name:"Immigration Law",  fee:"hourly, payment plans available",             consult:"$200 for 60 min" },
-    { name:"Estate Planning",  fee:"fixed fee packages from $500",                consult:"Free" }
+  var AREAS = [
+    { name:"Personal Injury",  fee:"contingency, you pay nothing unless we win", consult:"Free" },
+    { name:"Family Law",       fee:"hourly from $250 per hour",                  consult:"$200 for 60 min" },
+    { name:"Criminal Defense", fee:"varies by case complexity",                  consult:"Free" },
+    { name:"Business Law",     fee:"hourly or retainer arrangements available",  consult:"$250 for 60 min" },
+    { name:"Real Estate Law",  fee:"fixed fee for standard transactions",        consult:"$150 for 45 min" },
+    { name:"Immigration Law",  fee:"hourly, payment plans available",            consult:"$200 for 60 min" },
+    { name:"Estate Planning",  fee:"fixed fee packages from $500",               consult:"Free" }
   ];
 
-  /* ── STATE ── */
-  let stage = "welcome";
-  let intake  = {};
-  let booking = {};
-  let selectedArea = null;
+  /* ── INTENT ENGINE ── */
+  var INTENTS = [
+    { name:"need_help",    kw:["i need","need help","need a lawyer","need legal","need an attorney","got arrested","been charged","had accident","was injured","my husband","my wife","my child","custody","divorce","was in a crash","my business","deportation","want to make a will","my estate","my landlord","my tenant"] },
+    { name:"practice",     kw:["practice area","what do you handle","what do you do","what cases","what type","services","areas of law","types of law","specialise","specialize","fields","do you handle","do you cover","do you do"] },
+    { name:"consult",      kw:["consult","consultation","appointment","book","schedule","meeting","speak to a lawyer","speak to an attorney","talk to someone","see an attorney","set up","arrange","get advice"] },
+    { name:"fees",         kw:["fee","fees","cost","costs","price","prices","how much","charge","charges","payment","contingency","retainer","do you charge","is it free","free consult","what does it cost","afford"] },
+    { name:"about",        kw:["about","who are you","sterling law","your firm","your office","tell me about","your team","your attorneys","your lawyers","how long","since when","established","founded","background","history","how many","success rate","win rate","recovery","$380","4800","results","track record"] },
+    { name:"personal_injury",  kw:["accident","injury","injured","hurt","crash","car accident","slip","fall","workplace","medical malpractice","malpractice","compensation","insurance claim","victim"] },
+    { name:"family_law",       kw:["divorce","custody","child support","child custody","alimony","spousal support","adoption","prenup","prenuptial","separation","family","marriage","spouse","ex","children"] },
+    { name:"criminal",         kw:["criminal","crime","arrested","arrest","charged","charge","dui","dwi","drug","assault","theft","fraud","white collar","bail","arraignment","trial","defense attorney","public defender"] },
+    { name:"business_law",     kw:["business","contract","company","corporation","commercial","startup","llc","partnership","merger","compliance","litigation","dispute","vendor","partnership agreement"] },
+    { name:"real_estate",      kw:["property","landlord","tenant","real estate","house","apartment","lease","rent","title","eviction","foreclosure","zoning","purchase","mortgage","closing","deed"] },
+    { name:"immigration",      kw:["visa","immigration","immigrant","green card","citizenship","naturalize","deport","deportation","asylum","refugee","work permit","i-485","i-130","undocumented"] },
+    { name:"estate_planning",  kw:["will","trust","estate","probate","inheritance","beneficiary","power of attorney","healthcare directive","executor","living will","legacy","death","passed away"] },
+    { name:"emergency",        kw:["emergency","urgent","right now","tonight","today","just arrested","just happened","immediately","help now","crisis","asap"] },
+    { name:"contact",          kw:["contact","phone","call","email","address","office","location","hours","open","reach","get in touch","where are you","how do i contact"] },
+    { name:"confidential",     kw:["confidential","private","secret","safe","privilege","attorney client","trust","discreet","will you tell","will this be shared","anonymous"] },
+    { name:"greeting",         kw:["hello","hi","hey","good morning","good afternoon","good evening","greetings","howdy","hiya"] },
+    { name:"thanks",           kw:["thank you","thanks","appreciate","that helps","helpful","that is all","goodbye","bye","farewell","good day","no thanks","no thank"] }
+  ];
 
-  /* ── DOM ── */
-  const widget   = document.getElementById("vic-widget");
-  const launcher = document.getElementById("vic-launcher");
-  const msgs     = document.getElementById("vic-msgs");
-  const input    = document.getElementById("vic-input");
-  const sendBtn  = document.getElementById("vic-send");
+  function detectIntent(text) {
+    var t = text.toLowerCase();
+    var best = null, bestScore = 0;
+    INTENTS.forEach(function(intent) {
+      var score = 0;
+      intent.kw.forEach(function(kw) { if (t.includes(kw)) score++; });
+      if (score > bestScore) { bestScore = score; best = intent.name; }
+    });
+    return bestScore > 0 ? best : null;
+  }
 
-  /* ── TOGGLE ── */
-  launcher.addEventListener("click", () => {
+  var stage = "welcome";
+  var intake = {};
+  var booking = {};
+  var selectedArea = null;
+
+  var widget  = document.getElementById("vic-widget");
+  var launcher = document.getElementById("vic-launcher");
+  var msgs    = document.getElementById("vic-msgs");
+  var input   = document.getElementById("vic-input");
+  var sendBtn = document.getElementById("vic-send");
+
+  var mainMenu = ["I Need Legal Help", "Our Practice Areas", "Schedule a Consultation", "Fees and Consultations", "About Sterling Law Group"];
+
+  launcher.addEventListener("click", function() {
     widget.classList.toggle("open");
     if (widget.classList.contains("open") && msgs.children.length === 0) {
       setTimeout(greet, 380);
     }
   });
 
-  /* ── SEND ── */
   sendBtn.addEventListener("click", go);
-  input.addEventListener("keydown", e => { if (e.key === "Enter") go(); });
+  input.addEventListener("keydown", function(e) { if (e.key === "Enter") go(); });
 
   function go() {
-    const t = input.value.trim();
+    var t = input.value.trim();
     if (!t) return;
     input.value = "";
+    msgs.querySelectorAll(".vic-btns").forEach(function(b){ b.remove(); });
     bubble(t, "user");
     route(t);
   }
 
-  /* ── HELPERS ── */
   function bubble(html, who) {
-    const b = document.createElement("div");
+    var b = document.createElement("div");
     b.className = "vic-bubble " + who;
     b.innerHTML = html;
     msgs.appendChild(b);
@@ -1787,13 +518,13 @@
   }
 
   function buttons(arr) {
-    const w = document.createElement("div");
+    var w = document.createElement("div");
     w.className = "vic-btns";
-    arr.forEach(lbl => {
-      const b = document.createElement("button");
+    arr.forEach(function(lbl) {
+      var b = document.createElement("button");
       b.className = "vic-btn";
       b.textContent = lbl;
-      b.addEventListener("click", () => { w.remove(); bubble(lbl,"user"); route(lbl); });
+      b.addEventListener("click", function() { w.remove(); bubble(lbl, "user"); route(lbl); });
       w.appendChild(b);
     });
     msgs.appendChild(w);
@@ -1801,147 +532,192 @@
   }
 
   function typing(ms) {
-    return new Promise(res => {
-      const t = document.createElement("div");
+    return new Promise(function(res) {
+      var t = document.createElement("div");
       t.className = "vic-typing";
       t.innerHTML = "<span></span><span></span><span></span>";
-      msgs.appendChild(t);
-      scroll();
-      setTimeout(() => { t.remove(); res(); }, ms);
+      msgs.appendChild(t); scroll();
+      setTimeout(function() { t.remove(); res(); }, ms);
     });
   }
 
-  async function vic(html, btns, delay=850) {
-    await typing(delay);
+  async function vic(html, btns, delay) {
+    await typing(delay || 850);
     bubble(html, "agent");
     if (btns && btns.length) buttons(btns);
   }
 
   function scroll() { msgs.scrollTop = msgs.scrollHeight; }
 
-  /* ── GREET ── */
   async function greet() {
     stage = "welcome";
     await vic(
       "Good day. I am <strong>Victoria</strong>, the legal intake assistant for Sterling Law Group. " +
       "I can provide general information about our practice areas, answer questions about the firm, " +
       "or help you schedule a confidential consultation with one of our attorneys.<br><br>" +
-      "Please note that our conversation is <strong>strictly confidential</strong>, and nothing discussed here constitutes legal advice. How may I assist you?",
-      ["I Need Legal Help", "Our Practice Areas", "Schedule a Consultation", "Fees and Consultations", "About Sterling Law Group"],
-      650
+      "Please note that all conversations are <strong>strictly confidential</strong>, and nothing discussed here constitutes legal advice. " +
+      "How may I assist you today?",
+      mainMenu, 650
     );
   }
 
-  /* ── MAIN ROUTER ── */
   async function route(txt) {
-    const t = txt.toLowerCase();
+    var t = txt.toLowerCase();
 
-    if (t.includes("back") || t.includes("main menu") || t.includes("start over")) {
-      stage = "welcome";
-      await vic("Of course. How else may I assist you?",
-        ["I Need Legal Help","Our Practice Areas","Schedule a Consultation","Fees and Consultations","About Sterling Law Group"]); return;
-    }
-    if (t.includes("thank") || t.includes("bye") || t.includes("goodbye") || t.includes("that is all") || t.includes("no thank")) {
-      await vic("Thank you for contacting Sterling Law Group. We are here whenever you need us. Wishing you a productive day.", [], 600);
-      stage = "welcome"; return;
-    }
-
-    /* Top-level menu */
-    if (t.includes("i need legal") || t.includes("legal help") || t.includes("need help")) {
-      await startIntake(); return;
-    }
-    if (t.includes("practice area") || t.includes("what do you") || t.includes("services") || t.includes("areas of")) {
-      await showAreas(); return;
-    }
-    if (t.includes("schedule") || t.includes("consultation") || t.includes("appointment") || t.includes("book")) {
-      await startBooking(); return;
-    }
-    if (t.includes("fee") || t.includes("cost") || t.includes("price") || t.includes("how much") || t.includes("free consult")) {
-      await showFees(); return;
-    }
-    if (t.includes("about") || t.includes("who are") || t.includes("sterling law") || t.includes("firm")) {
-      await aboutFirm(); return;
+    /* Button routing */
+    if (t === "i need legal help") { await startIntake(); return; }
+    if (t === "our practice areas") { await showAreas(); return; }
+    if (t === "schedule a consultation") { await startBooking(); return; }
+    if (t === "fees and consultations") { await showFees(); return; }
+    if (t === "about sterling law group") { await aboutFirm(); return; }
+    if (t === "back to menu" || t === "main menu" || t === "start over") {
+      stage = "welcome"; await vic("Of course. How else may I assist you?", mainMenu); return;
     }
 
-    /* Practice area quick-hits */
-    const matchedArea = AREAS.find(a => t.includes(a.name.toLowerCase().split(" ")[0]));
-    if (matchedArea) { await areaDetail(matchedArea); return; }
+    /* Practice area buttons */
+    var areaMatch = AREAS.find(function(a){ return t === a.name.toLowerCase(); });
+    if (areaMatch) { await areaDetail(areaMatch); return; }
+    if (t === "schedule a specific date") { await startBooking(); return; }
+    if (t === "learn about fees" || t === "learn about our firm") { await showFees(); return; }
+    if (t === "view practice areas" || t === "view all practice areas") { await showAreas(); return; }
 
-    /* Stage routing */
-    switch(stage) {
-      case "intake_describe": await handleIntakeDesc(txt); break;
-      case "intake_name":     await handleIntakeName(txt); break;
-      case "intake_phone":    await handleIntakePhone(txt); break;
-      case "intake_email":    await handleIntakeEmail(txt); break;
-      case "intake_done":     await handleIntakeDone(txt); break;
-      case "book_area":       await handleBookArea(txt); break;
-      case "book_date":       await handleBookDate(txt); break;
-      case "book_time":       await handleBookTime(txt); break;
-      case "book_name":       await handleBookName(txt); break;
-      case "book_phone":      await handleBookPhone(txt); break;
-      case "book_done":       await handleBookDone(txt); break;
-      default:                await fallback(txt); break;
+    /* Stage-specific collection */
+    if (stage === "intake_describe") { await handleIntakeDesc(txt); return; }
+    if (stage === "intake_name")     { await handleIntakeName(txt); return; }
+    if (stage === "intake_phone")    { await handleIntakePhone(txt); return; }
+    if (stage === "intake_email")    { await handleIntakeEmail(txt); return; }
+    if (stage === "intake_done")     { await handleIntakeDone(txt); return; }
+    if (stage === "book_area")       { await handleBookArea(txt); return; }
+    if (stage === "book_date")       { await handleBookDate(txt); return; }
+    if (stage === "book_time")       { await handleBookTime(txt); return; }
+    if (stage === "book_name")       { await handleBookName(txt); return; }
+    if (stage === "book_phone")      { await handleBookPhone(txt); return; }
+    if (stage === "book_done")       { await handleBookDone(txt); return; }
+
+    /* Smart intent detection */
+    var intent = detectIntent(t);
+    if (intent) {
+      await respondToIntent(intent, txt);
+    } else {
+      await fallback(txt);
     }
   }
 
-  /* ── PRACTICE AREAS ── */
+  async function respondToIntent(intent, txt) {
+    switch(intent) {
+      case "greeting":
+        await vic("Good day. I am Victoria, Sterling Law Group's legal intake assistant. How may I help you today?", mainMenu, 600);
+        break;
+      case "thanks":
+        await vic("Thank you for contacting Sterling Law Group. We are here whenever you need us. Wishing you a productive day.", [], 600);
+        stage = "welcome";
+        break;
+      case "need_help":
+        await startIntake();
+        break;
+      case "practice":
+        await showAreas();
+        break;
+      case "consult":
+        await startBooking();
+        break;
+      case "fees":
+        await showFees();
+        break;
+      case "about":
+        await aboutFirm();
+        break;
+      case "personal_injury":
+        await areaDetail(AREAS[0]);
+        break;
+      case "family_law":
+        await areaDetail(AREAS[1]);
+        break;
+      case "criminal":
+        await areaDetail(AREAS[2]);
+        break;
+      case "business_law":
+        await areaDetail(AREAS[3]);
+        break;
+      case "real_estate":
+        await areaDetail(AREAS[4]);
+        break;
+      case "immigration":
+        await areaDetail(AREAS[5]);
+        break;
+      case "estate_planning":
+        await areaDetail(AREAS[6]);
+        break;
+      case "emergency":
+        await vic(
+          "For urgent legal matters or after-hours emergencies, please call our <strong>24-hour emergency line</strong> immediately.<br><br>" +
+          "Phone: <strong>(555) 400-7200</strong><br><br>" +
+          "An on-call attorney is available at all times for matters that cannot wait until business hours. Please call now.",
+          ["Schedule a Consultation", "Back to Menu"]
+        );
+        break;
+      case "contact":
+        await vic(
+          "You can reach Sterling Law Group through the following:<br><br>" +
+          "Phone: <strong>(555) 400-7200</strong><br>" +
+          "Email: <strong>consult@sterlinglawgroup.com</strong><br>" +
+          "Address: <strong>300 Sterling Plaza, Suite 1800</strong><br>" +
+          "Hours: <strong>Monday to Friday, 8:00 AM to 6:00 PM</strong><br>" +
+          "Emergency line: <strong>Available 24 hours</strong>",
+          ["Schedule a Consultation", "Back to Menu"]
+        );
+        break;
+      case "confidential":
+        await vic(
+          "All communications with Sterling Law Group are protected by <strong>attorney-client privilege</strong> and our strict confidentiality protocols. " +
+          "Nothing you share with us through this chat, by telephone, or in person will ever be disclosed to any third party without your express consent. " +
+          "You may speak freely.",
+          ["I Need Legal Help", "Schedule a Consultation", "Back to Menu"]
+        );
+        break;
+      default:
+        await fallback(txt);
+    }
+  }
+
   async function showAreas() {
     stage = "welcome";
-    let html = "Sterling Law Group handles matters across seven practice areas. Select one to learn more:<br><br>";
-    AREAS.forEach(a => {
-      html += `<strong>${a.name}</strong> — Consultation: ${a.consult}<br>`;
+    var html = "Sterling Law Group handles matters across seven practice areas. Select one to learn more:<br><br>";
+    AREAS.forEach(function(a) {
+      html += "<strong>" + a.name + "</strong> &mdash; Consultation: " + a.consult + "<br>";
     });
-    await vic(html, [...AREAS.map(a => a.name), "Schedule a Consultation", "Back to Menu"]);
+    var btns = AREAS.map(function(a){ return a.name; });
+    btns.push("Schedule a Consultation", "Back to Menu");
+    await vic(html, btns);
   }
 
   async function areaDetail(area) {
     stage = "welcome";
-    const details = {
-      "Personal Injury":
-        "We represent clients in car accidents, workplace injuries, slip-and-fall incidents, and medical malpractice claims. " +
-        "We operate on a <strong>contingency fee basis</strong> — you pay absolutely nothing unless we recover compensation on your behalf. " +
-        "Initial consultations are free and fully confidential.",
-      "Family Law":
-        "Our family law team handles divorce, child custody, child support, spousal maintenance, adoption, and prenuptial agreements. " +
-        "We approach sensitive family matters with both legal precision and genuine empathy. " +
-        "Consultations are $200 for 60 minutes.",
-      "Criminal Defense":
-        "Facing criminal charges is serious, and you deserve experienced, aggressive representation. " +
-        "We defend clients at every stage from arraignment through trial, covering DUI, drug offenses, assault, theft, and white-collar matters. " +
-        "Free initial consultations available.",
-      "Business Law":
-        "We advise businesses at every stage — from formation and contract drafting through commercial disputes, mergers, and compliance. " +
-        "Retainer arrangements are available for ongoing business clients. " +
-        "Consultations are $250 for 60 minutes.",
-      "Real Estate Law":
-        "Our real estate attorneys handle residential and commercial transactions, title disputes, landlord-tenant conflicts, zoning matters, and foreclosure defense. " +
-        "Fixed-fee services are available for standard transactions. " +
-        "Consultations are $150 for 45 minutes.",
-      "Immigration Law":
-        "We guide individuals and families through visa applications, green cards, citizenship proceedings, asylum claims, and deportation defense. " +
-        "Payment plans are available. Consultations are $200 for 60 minutes.",
-      "Estate Planning":
-        "We draft wills, trusts, powers of attorney, healthcare directives, and handle probate and estate administration. " +
-        "Fixed-fee packages start from $500. Free initial consultations available."
+    var details = {
+      "Personal Injury": "We represent clients in car accidents, workplace injuries, slip-and-fall incidents, and medical malpractice claims. We operate on a <strong>contingency fee basis</strong>, meaning you pay absolutely nothing unless we recover compensation on your behalf. Initial consultations are free and fully confidential.",
+      "Family Law": "Our family law team handles divorce, child custody, child support, spousal maintenance, adoption, and prenuptial agreements. We approach sensitive family matters with both legal precision and genuine empathy. Consultations are $200 for 60 minutes.",
+      "Criminal Defense": "Facing criminal charges is serious, and you deserve experienced, aggressive representation. We defend clients at every stage from arraignment through trial, covering DUI, drug offenses, assault, theft, fraud, and white-collar matters. Free initial consultations are available.",
+      "Business Law": "We advise businesses at every stage, from formation and contract drafting through commercial disputes, mergers, and compliance. Retainer arrangements are available for ongoing business clients. Consultations are $250 for 60 minutes.",
+      "Real Estate Law": "Our real estate attorneys handle residential and commercial transactions, title disputes, landlord-tenant conflicts, zoning matters, and foreclosure defense. Fixed-fee services are available for standard transactions. Consultations are $150 for 45 minutes.",
+      "Immigration Law": "We guide individuals and families through visa applications, green cards, citizenship proceedings, asylum claims, and deportation defense. Payment plans are available. Consultations are $200 for 60 minutes.",
+      "Estate Planning": "We draft wills, trusts, powers of attorney, healthcare directives, and handle probate and estate administration. Fixed-fee packages start from $500. Free initial consultations are available."
     };
     await vic(
-      `<strong>${area.name}</strong><br><br>${details[area.name] || "Our team handles all aspects of " + area.name + " with the precision and dedication our clients deserve."}`,
+      "<strong>" + area.name + "</strong><br><br>" + (details[area.name] || "Our team handles all aspects of " + area.name + " with the precision and dedication our clients deserve."),
       ["Schedule a Consultation", "View All Practice Areas", "Back to Menu"]
     );
   }
 
-  /* ── FEES ── */
   async function showFees() {
     stage = "welcome";
-    let html = "Here is a summary of our consultation fees:<br><br>";
-    AREAS.forEach(a => {
-      html += `<strong>${a.name}:</strong> ${a.consult}<br>`;
+    var html = "Here is a summary of our consultation fees:<br><br>";
+    AREAS.forEach(function(a) {
+      html += "<strong>" + a.name + ":</strong> " + a.consult + "<br>";
     });
-    html += "<br>Personal injury and criminal defense consultations are always free. For all other matters, consultation fees are credited toward your case if you retain our firm.";
+    html += "<br>Personal injury and criminal defense consultations are always free. For all other matters, the consultation fee is credited toward your case if you retain our firm.";
     await vic(html, ["Schedule a Consultation", "View Practice Areas", "Back to Menu"]);
   }
 
-  /* ── ABOUT ── */
   async function aboutFirm() {
     stage = "welcome";
     await vic(
@@ -1949,12 +725,11 @@
       "Over 25 years, our attorneys have recovered more than <strong>$380 million</strong> for clients and successfully represented over <strong>4,800</strong> individuals, families, and businesses.<br><br>" +
       "Our team includes former prosecutors, federal litigators, and specialists across all seven practice areas. " +
       "We maintain a <strong>97% case success rate</strong> and an absolute commitment to client confidentiality at every stage of every matter.<br><br>" +
-      "We are located at 300 Sterling Plaza, Suite 1800. Office hours are Monday to Friday, 8:00 AM to 6:00 PM, with a 24-hour emergency line available.",
+      "Office: 300 Sterling Plaza, Suite 1800. Hours: Monday to Friday, 8:00 AM to 6:00 PM. Emergency line available 24 hours.",
       ["Schedule a Consultation", "Our Practice Areas", "Back to Menu"]
     );
   }
 
-  /* ── INTAKE (I Need Legal Help) ── */
   async function startIntake() {
     stage = "intake_describe";
     intake = {};
@@ -1967,249 +742,142 @@
 
   async function handleIntakeDesc(txt) {
     intake.description = txt;
-    const t = txt.toLowerCase();
-
-    let matched = null;
-    if (t.includes("accident") || t.includes("injury") || t.includes("hurt") || t.includes("crash") || t.includes("medical")) matched = AREAS[0];
-    else if (t.includes("divorce") || t.includes("custody") || t.includes("child") || t.includes("marriage") || t.includes("separation")) matched = AREAS[1];
-    else if (t.includes("criminal") || t.includes("arrest") || t.includes("charge") || t.includes("dui") || t.includes("drug")) matched = AREAS[2];
-    else if (t.includes("business") || t.includes("contract") || t.includes("company") || t.includes("commercial")) matched = AREAS[3];
-    else if (t.includes("property") || t.includes("landlord") || t.includes("tenant") || t.includes("real estate") || t.includes("house")) matched = AREAS[4];
-    else if (t.includes("visa") || t.includes("immigra") || t.includes("citizenship") || t.includes("green card") || t.includes("deport")) matched = AREAS[5];
-    else if (t.includes("will") || t.includes("trust") || t.includes("estate") || t.includes("probate") || t.includes("inheritance")) matched = AREAS[6];
-
+    var t = txt.toLowerCase();
+    var matched = null;
+    if (t.includes("accident") || t.includes("injury") || t.includes("hurt") || t.includes("crash") || t.includes("medical") || t.includes("slip") || t.includes("fall")) matched = AREAS[0];
+    else if (t.includes("divorce") || t.includes("custody") || t.includes("child") || t.includes("marriage") || t.includes("separation") || t.includes("alimony") || t.includes("spouse")) matched = AREAS[1];
+    else if (t.includes("criminal") || t.includes("arrest") || t.includes("charge") || t.includes("dui") || t.includes("drug") || t.includes("assault") || t.includes("theft") || t.includes("fraud")) matched = AREAS[2];
+    else if (t.includes("business") || t.includes("contract") || t.includes("company") || t.includes("commercial") || t.includes("startup") || t.includes("merger")) matched = AREAS[3];
+    else if (t.includes("property") || t.includes("landlord") || t.includes("tenant") || t.includes("real estate") || t.includes("house") || t.includes("eviction") || t.includes("lease")) matched = AREAS[4];
+    else if (t.includes("visa") || t.includes("immigra") || t.includes("citizenship") || t.includes("green card") || t.includes("deport") || t.includes("asylum")) matched = AREAS[5];
+    else if (t.includes("will") || t.includes("trust") || t.includes("estate") || t.includes("probate") || t.includes("inheritance") || t.includes("executor")) matched = AREAS[6];
     selectedArea = matched;
-
+    stage = "intake_name";
     if (matched) {
-      stage = "intake_name";
       await vic(
-        `Based on what you have described, this appears to fall under our <strong>${matched.name}</strong> practice. ` +
-        `Our ${matched.name} team is highly experienced in exactly this area.<br><br>` +
-        `The consultation fee for ${matched.name} matters is <strong>${matched.consult}</strong>. ` +
-        `To connect you with the right attorney, may I take your full name?`
+        "Based on what you have described, this appears to fall under our <strong>" + matched.name + "</strong> practice. " +
+        "Our " + matched.name + " team is highly experienced in exactly this area.<br><br>" +
+        "The consultation fee is <strong>" + matched.consult + "</strong>. " +
+        "To connect you with the right attorney, may I take your full name?"
       );
     } else {
-      stage = "intake_name";
-      await vic(
-        "Thank you for sharing that. Our attorneys handle a broad range of legal matters and I am confident we can assist you. " +
-        "To ensure the right attorney reviews your situation, may I take your full name?"
-      );
+      await vic("Thank you for sharing that. Our attorneys handle a broad range of legal matters and I am confident we can assist you. To ensure the right attorney reviews your situation, may I take your full name?");
     }
   }
 
-  async function handleIntakeName(txt) {
-    intake.name = txt;
-    stage = "intake_phone";
-    await vic(`Thank you, ${txt.split(" ")[0]}. What is the best telephone number to reach you?`);
-  }
-
-  async function handleIntakePhone(txt) {
-    intake.phone = txt;
-    stage = "intake_email";
-    await vic("And your email address, so we can send you confirmation and any relevant information ahead of your consultation?");
-  }
-
+  async function handleIntakeName(txt) { intake.name = txt; stage = "intake_phone"; await vic("Thank you, " + txt.split(" ")[0] + ". What is the best telephone number to reach you?"); }
+  async function handleIntakePhone(txt) { intake.phone = txt; stage = "intake_email"; await vic("And your email address, so we can send you confirmation ahead of your consultation?"); }
   async function handleIntakeEmail(txt) {
-    intake.email = txt;
-    stage = "intake_done";
-    const area = selectedArea ? selectedArea.name : "General Legal Matter";
-    const fee  = selectedArea ? selectedArea.consult : "to be confirmed";
+    intake.email = txt; stage = "intake_done";
+    var area = selectedArea ? selectedArea.name : "General Legal Matter";
+    var fee  = selectedArea ? selectedArea.consult : "to be confirmed";
     await vic(
-      `Thank you. Here is a summary of your intake request:<br><br>` +
-      `Name: <strong>${intake.name}</strong><br>` +
-      `Phone: <strong>${intake.phone}</strong><br>` +
-      `Email: <strong>${intake.email}</strong><br>` +
-      `Matter: <strong>${area}</strong><br>` +
-      `Consultation fee: <strong>${fee}</strong><br><br>` +
-      `A member of our team will contact you within <strong>2 business hours</strong> to confirm your appointment. ` +
-      `All information provided is protected by strict confidentiality protocols. Is there anything else I can assist you with?`,
+      "Thank you. Here is a summary of your intake request:<br><br>" +
+      "Name: <strong>" + intake.name + "</strong><br>" +
+      "Phone: <strong>" + intake.phone + "</strong><br>" +
+      "Email: <strong>" + intake.email + "</strong><br>" +
+      "Matter: <strong>" + area + "</strong><br>" +
+      "Consultation fee: <strong>" + fee + "</strong><br><br>" +
+      "A member of our team will contact you within <strong>2 business hours</strong> to confirm your appointment. " +
+      "All information is protected by strict confidentiality protocols. Is there anything else I can assist you with?",
       ["Schedule a Specific Date", "Learn About Fees", "Back to Menu", "That is all, thank you"]
     );
   }
-
   async function handleIntakeDone(txt) {
-    const t = txt.toLowerCase();
+    var t = txt.toLowerCase();
     if (t.includes("schedule") || t.includes("specific date")) { await startBooking(); return; }
     if (t.includes("fee") || t.includes("cost")) { await showFees(); return; }
-    if (t.includes("back") || t.includes("menu")) { stage = "welcome"; await greet(); return; }
+    if (t.includes("back") || t.includes("menu")) { stage = "welcome"; await vic("How else may I assist you?", mainMenu); return; }
     await vic("You are most welcome. Sterling Law Group looks forward to assisting you. Have a productive day.", [], 600);
     stage = "welcome";
   }
 
-  /* ── BOOKING ── */
   async function startBooking() {
-    stage = "book_area";
-    booking = {};
-    await vic(
-      "I would be glad to schedule a consultation for you. Which practice area does your matter relate to?",
-      [...AREAS.map(a => a.name), "Not Sure Yet"]
-    );
+    stage = "book_area"; booking = {};
+    var btns = AREAS.map(function(a){ return a.name; });
+    btns.push("Not Sure Yet");
+    await vic("I would be glad to schedule a consultation for you. Which practice area does your matter relate to?", btns);
   }
-
   async function handleBookArea(txt) {
     booking.area = txt;
-    const matched = AREAS.find(a => txt.toLowerCase().includes(a.name.toLowerCase().split(" ")[0]));
-    const fee = matched ? matched.consult : "to be confirmed by our team";
+    var matched = AREAS.find(function(a){ return txt.toLowerCase().includes(a.name.toLowerCase().split(" ")[0]); });
+    var fee = matched ? matched.consult : "to be confirmed by our team";
     stage = "book_date";
     await vic(
-      `<strong>${txt}</strong> — noted. The consultation fee for this area is <strong>${fee}</strong>.<br><br>` +
-      `Our attorneys are available Monday to Friday, 8:00 AM to 6:00 PM, and Saturday by appointment. ` +
-      `What date works best for you?`
+      "<strong>" + txt + "</strong> noted. The consultation fee for this area is <strong>" + fee + "</strong>.<br><br>" +
+      "Our attorneys are available Monday to Friday, 8:00 AM to 6:00 PM, and Saturday by appointment. What date works best for you?"
     );
   }
-
   async function handleBookDate(txt) {
-    booking.date = txt;
-    stage = "book_time";
-    await vic(`${txt} — understood. What time would you prefer?`,
-      ["8:00 AM", "10:00 AM", "12:00 PM", "2:00 PM", "4:00 PM", "Saturday Morning"]);
+    booking.date = txt; stage = "book_time";
+    await vic(txt + " understood. What time would you prefer?", ["8:00 AM", "10:00 AM", "12:00 PM", "2:00 PM", "4:00 PM", "Saturday Morning"]);
   }
-
-  async function handleBookTime(txt) {
-    booking.time = txt;
-    stage = "book_name";
-    await vic(`${txt} is noted. May I have your full name?`);
-  }
-
-  async function handleBookName(txt) {
-    booking.clientName = txt;
-    stage = "book_phone";
-    await vic(`Thank you, ${txt.split(" ")[0]}. And your contact telephone number?`);
-  }
-
+  async function handleBookTime(txt) { booking.time = txt; stage = "book_name"; await vic(txt + " is noted. May I have your full name?"); }
+  async function handleBookName(txt) { booking.clientName = txt; stage = "book_phone"; await vic("Thank you, " + txt.split(" ")[0] + ". And your contact telephone number?"); }
   async function handleBookPhone(txt) {
-    booking.phone = txt;
-    stage = "book_done";
+    booking.phone = txt; stage = "book_done";
     await vic(
-      `Your consultation has been scheduled. Here is your confirmation:<br><br>` +
-      `Practice Area: <strong>${booking.area}</strong><br>` +
-      `Date: <strong>${booking.date}</strong><br>` +
-      `Time: <strong>${booking.time}</strong><br>` +
-      `Name: <strong>${booking.clientName}</strong><br>` +
-      `Contact: <strong>${booking.phone}</strong><br><br>` +
-      `A confirmation email will be sent to you shortly, and an attorney will review your matter in advance of your appointment. ` +
-      `Please arrive 10 minutes early for your first visit. All consultations are <strong>strictly confidential</strong>.<br><br>` +
-      `Is there anything else I can assist you with?`,
+      "Your consultation has been scheduled. Here is your confirmation:<br><br>" +
+      "Practice Area: <strong>" + booking.area + "</strong><br>" +
+      "Date: <strong>" + booking.date + "</strong><br>" +
+      "Time: <strong>" + booking.time + "</strong><br>" +
+      "Name: <strong>" + booking.clientName + "</strong><br>" +
+      "Contact: <strong>" + booking.phone + "</strong><br><br>" +
+      "A confirmation will be sent to you shortly, and an attorney will review your matter in advance of your appointment. " +
+      "Please arrive 10 minutes early for your first visit. All consultations are <strong>strictly confidential</strong>.<br><br>" +
+      "Is there anything else I can assist you with?",
       ["Learn About Our Firm", "View Practice Areas", "Back to Menu", "That is all, thank you"]
     );
   }
-
   async function handleBookDone(txt) {
-    const t = txt.toLowerCase();
+    var t = txt.toLowerCase();
     if (t.includes("firm") || t.includes("about")) { await aboutFirm(); return; }
     if (t.includes("practice") || t.includes("area")) { await showAreas(); return; }
-    if (t.includes("back") || t.includes("menu")) { stage = "welcome"; await greet(); return; }
+    if (t.includes("back") || t.includes("menu")) { stage = "welcome"; await vic("How else may I assist you?", mainMenu); return; }
     await vic("Excellent. We look forward to meeting with you. Sterling Law Group is committed to protecting your rights and achieving the result you deserve. Have a wonderful day.", [], 700);
     stage = "welcome";
   }
 
-  /* ── FALLBACK ── */
   async function fallback(txt) {
-    const t = txt.toLowerCase();
-    if (t.includes("emergency") || t.includes("urgent") || t.includes("arrested") || t.includes("tonight")) {
-      await vic(
-        "For urgent legal matters or after-hours emergencies, please call our <strong>24-hour emergency line</strong> immediately.<br><br>" +
-        "Phone: <strong>(555) 400-7200</strong><br><br>" +
-        "An on-call attorney is available at all times for matters that cannot wait until business hours.",
-        ["Schedule a Consultation", "Back to Menu"]
-      ); return;
-    }
-    if (t.includes("contact") || t.includes("address") || t.includes("office") || t.includes("phone") || t.includes("email") || t.includes("where")) {
-      await vic(
-        "You can reach Sterling Law Group through the following:<br><br>" +
-        "Phone: <strong>(555) 400-7200</strong><br>" +
-        "Email: <strong>consult@sterlinglawgroup.com</strong><br>" +
-        "Address: <strong>300 Sterling Plaza, Suite 1800</strong><br>" +
-        "Hours: <strong>Monday to Friday, 8:00 AM to 6:00 PM</strong><br>" +
-        "Emergency line: <strong>Available 24 hours</strong>",
-        ["Schedule a Consultation", "Back to Menu"]
-      ); return;
-    }
-    if (t.includes("confidential") || t.includes("private") || t.includes("secret") || t.includes("safe")) {
-      await vic(
-        "All communications with Sterling Law Group are protected by <strong>attorney-client privilege</strong> and our strict confidentiality protocols. " +
-        "Nothing you share with us — through this chat, by telephone, or in person — will ever be disclosed to any third party without your express consent. " +
-        "You can speak freely.",
-        ["I Need Legal Help", "Schedule a Consultation", "Back to Menu"]
-      ); return;
+    var t = txt.toLowerCase();
+    if (t.includes("yes") || t.includes("sure") || t.includes("okay") || t.includes("ok") || t.includes("alright") || t.includes("please")) {
+      await vic("Of course. What would you like to do?", mainMenu); return;
     }
     await vic(
       "I want to ensure I direct you to the right place. Could you tell me a little more about what you need, or select an option below?",
-      ["I Need Legal Help", "Our Practice Areas", "Schedule a Consultation", "About the Firm"]
+      mainMenu
     );
   }
 
-  /* ── PAGE JS ── */
-  // Scroll reveal
-  document.querySelectorAll('.reveal').forEach(el => {
-    new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  /* Page JS */
+  document.querySelectorAll(".reveal").forEach(function(el) {
+    new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add("visible"); });
     }, { threshold: 0.12 }).observe(el);
   });
 
-  // Sticky nav shadow
-  const navbar = document.getElementById('navbar');
-  if (navbar) window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 60); });
+  var navbar = document.getElementById("navbar");
+  if (navbar) window.addEventListener("scroll", function(){ navbar.classList.toggle("scrolled", window.scrollY > 60); });
 
-  // Hamburger
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
-  if (hamburger && mobileMenu) {
-    hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
-  }
-  window.closeMobile = function() { if (mobileMenu) mobileMenu.classList.remove('open'); };
+  var hamburger = document.getElementById("hamburger");
+  var mobileMenu = document.getElementById("mobileMenu");
+  if (hamburger && mobileMenu) hamburger.addEventListener("click", function(){ mobileMenu.classList.toggle("open"); });
+  window.closeMobile = function() { if (mobileMenu) mobileMenu.classList.remove("open"); };
 
-  // Stagger practice card delays
-  document.querySelectorAll('.practice-card').forEach((c, i) => { c.style.transitionDelay = (i * 0.07) + 's'; });
+  document.querySelectorAll(".practice-card").forEach(function(c, i){ c.style.transitionDelay = (i * 0.07) + "s"; });
 
-  // Chat nudge
-  const nudge = document.getElementById('chatNudge');
+  var nudge = document.getElementById("chatNudge");
   if (nudge) {
-    setTimeout(() => nudge.classList.add('show'), 5000);
-    const nc = document.getElementById('nudgeClose');
-    if (nc) nc.addEventListener('click', e => { e.stopPropagation(); nudge.classList.remove('show'); });
-    nudge.addEventListener('click', () => { widget.classList.add('open'); nudge.classList.remove('show'); if (msgs.children.length === 0) setTimeout(greet, 380); });
+    setTimeout(function(){ nudge.classList.add("show"); }, 5000);
+    var nc = document.getElementById("nudgeClose");
+    if (nc) nc.addEventListener("click", function(e){ e.stopPropagation(); nudge.classList.remove("show"); });
+    nudge.addEventListener("click", function(){
+      widget.classList.add("open"); nudge.classList.remove("show");
+      if (msgs.children.length === 0) setTimeout(greet, 380);
+    });
   }
 
 })();
 </script>
-
-  <!-- JS: Scroll effects, nav, nudge -->
-  <script>
-    // Scroll reveal
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-    }, { threshold: 0.12 });
-    reveals.forEach(r => observer.observe(r));
-
-    // Sticky nav shadow
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 60);
-    });
-
-    // Hamburger
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
-    hamburger.addEventListener('click', () => {
-      mobileMenu.classList.toggle('open');
-    });
-    function closeMobile() { mobileMenu.classList.remove('open'); }
-
-    // Chat nudge — show after 5s
-    const nudge = document.getElementById('chatNudge');
-    setTimeout(() => nudge.classList.add('show'), 5000);
-    document.getElementById('nudgeClose').addEventListener('click', e => {
-      e.stopPropagation();
-      nudge.classList.remove('show');
-    });
-
-    // Stagger reveal delays on grid items
-    document.querySelectorAll('.practice-card').forEach((c, i) => {
-      c.style.transitionDelay = (i * 0.07) + 's';
-    });
-  </script>
-
 </body>
 </html>
